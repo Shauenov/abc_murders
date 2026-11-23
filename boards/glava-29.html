@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Глава XXIX «В Скотленд-Ярде» — доска улик · Убийства по алфавиту</title><style>:root{
+  --cork:#c9a26b; --cork-dark:#a9824e; --paper:#fffaf0; --ink:#2b2118;
+  --muted:#6b5a48; --red:#b3261e; --pin:#d33; --yellow:#fff3b0;
+  --person:#f6e7c8; --thing:#e6eef6; --place:#e3f0e1; --time:#f9e1e1;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);
+  background:
+    radial-gradient(circle at 20% 30%,rgba(0,0,0,.06) 1px,transparent 2px) 0 0/14px 14px,
+    radial-gradient(circle at 70% 60%,rgba(255,255,255,.08) 1px,transparent 2px) 0 0/11px 11px,
+    var(--cork);}
+.board{max-width:1400px;margin:0 auto;padding:28px 28px 40px}
+header{background:var(--paper);padding:16px 24px;border-radius:4px;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);position:relative;margin-bottom:26px;transform:rotate(-.4deg)}
+header h1{margin:0;font-size:30px;letter-spacing:.5px}
+header p{margin:6px 0 0;color:var(--muted);font-size:15px}
+header .narr{display:inline-block;margin-top:8px;background:var(--time);padding:3px 10px;border-radius:12px;font-size:13.5px;color:var(--ink)}
+nav.chap{display:flex;justify-content:space-between;gap:10px;margin:0 0 18px;font-size:14px}
+nav.chap a{background:var(--paper);color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:3px;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.pin{position:absolute;top:-9px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ff8a80,var(--pin) 55%,#7a1010);box-shadow:0 2px 3px rgba(0,0,0,.4)}
+h2.section{display:inline-block;background:var(--ink);color:#fff;font-size:15px;letter-spacing:2px;
+  text-transform:uppercase;padding:6px 14px;margin:8px 0 14px;border-radius:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-bottom:26px}
+.card{background:var(--paper);border-radius:3px;padding:16px 16px 12px;position:relative;
+  box-shadow:0 5px 12px rgba(0,0,0,.28)}
+.card:nth-child(3n+1){transform:rotate(-.8deg)} .card:nth-child(3n+2){transform:rotate(.6deg)}
+.card .tag{position:absolute;top:10px;right:12px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:2px 8px;border-radius:10px;color:var(--muted)}
+.person .tag{background:var(--person)} .thing .tag{background:var(--thing)}
+.place .tag{background:var(--place)}
+.portrait{width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:52px;margin:4px 0 8px;border:3px solid #fff;box-shadow:0 0 0 2px var(--cork-dark)}
+.person .portrait{background:var(--person)} .thing .portrait{background:var(--thing)}
+.place .portrait{background:var(--place)}
+.card h3{margin:0 0 2px;font-size:21px}
+.card .role{color:var(--muted);font-style:italic;margin:0 0 10px;font-size:14px}
+.card ul{margin:0;padding-left:18px} .card li{margin:5px 0;font-size:14.5px;line-height:1.35}
+q{font-style:italic;quotes:"«" "»"} .pg{color:var(--muted);font-size:11.5px;white-space:nowrap}
+.key{background:var(--yellow);padding:0 3px}
+.letter{font-family:"Courier New",Courier,monospace;background:#fff;border:1px solid #ddd;
+  padding:12px 14px;font-size:13.5px;line-height:1.45;margin:8px 0}
+.letter .sig{text-align:right;font-weight:bold;letter-spacing:2px}
+.links{background:var(--paper);border-radius:3px;padding:16px 18px;box-shadow:0 5px 12px rgba(0,0,0,.28);margin-bottom:26px;position:relative}
+.link{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:9px 0;font-size:15px}
+.chip{padding:4px 10px;border-radius:14px;font-weight:bold;border:1px solid rgba(0,0,0,.12)}
+.chip.person{background:var(--person)} .chip.thing{background:var(--thing)} .chip.place{background:var(--place)}
+.arrow{color:var(--red);font-weight:bold}
+.arrow::after{content:" ⟶"}
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;
+  background:var(--paper);border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;margin-bottom:26px}
+.step{padding:16px 16px 14px;border-right:2px dashed var(--cork-dark);position:relative}
+.step:last-child{border-right:none}
+.step .when{display:inline-block;background:var(--red);color:#fff;font-weight:bold;font-size:13px;padding:3px 9px;border-radius:2px}
+.step p{margin:8px 0 0;font-size:14.5px;line-height:1.35}
+.remember{background:var(--yellow);padding:16px 22px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;transform:rotate(.3deg)}
+.remember h2{margin:0 0 8px;font-size:20px}
+.remember ol{margin:0;padding-left:22px;columns:2;column-gap:36px} .remember li{margin:5px 0;font-size:15px;break-inside:avoid}
+footer{margin-top:20px;color:#3d2c1a;font-size:12.5px;text-align:center}
+.bigboard{display:block;position:relative;background:var(--yellow);color:var(--ink);text-decoration:none;padding:18px 22px;margin:0 0 24px;
+  border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);font-size:22px;transform:rotate(-.3deg)}
+.bigboard small{display:block;font-size:14.5px;color:var(--muted);margin-top:4px}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.toc a{display:block;background:var(--paper);color:var(--ink);text-decoration:none;padding:12px 14px;border-radius:3px;box-shadow:0 4px 9px rgba(0,0,0,.25)}
+.toc a b{display:block;font-size:13px;color:var(--muted);letter-spacing:1px}
+@media (max-width:700px){.remember ol{columns:1}}
+@media print{
+  @page{size:A3 landscape;margin:10mm}
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card,header,.remember{transform:none!important}
+  .card,.links,.timeline,.remember{box-shadow:0 0 0 1px #bbb}
+  nav.chap{display:none}
+}
+</style></head><body><div class="board"><nav class="chap"><a href="glava-28.html">← Глава 28</a><a href="index.html">Все главы</a><a href="glava-30.html">Глава 30 →</a></nav><header><span class="pin"></span><h1>🔎 Глава XXIX. «В Скотленд-Ярде»</h1><p>Агата Кристи, «Убийства по алфавиту». Все детали и цитаты взяты из текста книги; <span class="pg">стр.</span> — номер страницы в PDF.</p><span class="narr">Рассказывает капитан Гастингс</span></header><h2 class="section">Кто</h2><div class="grid"><div class="card person"><span class="pin"></span><span class="tag">Скотленд-Ярд</span><div class="portrait">🎓</div><h3>Инспектор Кроум</h3><p class="role">подводит итог расследования <span class="pg">стр. 175</span></p><ul><li>Проверил <b>Керстон, Пейнтон и Торки</b>, составил список покупателей чулок <span class="pg">стр. 175</span></li><li>В Керстоне подозреваемый жил в гостинице <b>«Питт»</b> у станции Торре в Пейнтоне <span class="pg">стр. 175</span></li><li>В Бэксхилле — в гостинице <b>«Перчатка»</b>, <b>под собственным именем</b> <span class="pg">стр. 175</span></li><li>В Андовере — в гостинице <b>«Перина»</b> <span class="pg">стр. 175</span></li><li>Приехал на Кэмденскую дорогу: Каст ушёл <b>за полчаса до него</b> <span class="pg">стр. 176</span></li><li><b>Нашёл нож</b> за вешалкой в холле — <b>с засохшей кровью</b> <span class="pg">стр. 176</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">руководитель</span><div class="portrait">🏛️</div><h3>Помощник комиссара</h3><p class="role"><span class="pg">стр. 175–177</span></p><ul><li>Хвалит идею Пуаро проверить продавцов чулок <span class="pg">стр. 175</span></li><li>Предполагает <b>сообщника</b> — Пуаро: «маловероятно» <span class="pg">стр. 176</span></li><li>Ворчит на «научный жаргон»: современный врач сказал бы лечить A. B. C. <b>сорок пять дней</b> <span class="pg">стр. 177</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">сыщик</span><div class="portrait"><svg viewBox="0 0 100 50" width="70" height="35" aria-label="усы"><path d="M50 22c-6-10-20-12-30-6-6 4-10 2-14-3 0 10 8 18 20 17 10 0 18-4 24-8zM50 22c6-10 20-12 30-6 6 4 10 2 14-3 0 10-8 18-20 17-10 0-18-4-24-8z" fill="#2b2118"/></svg></div><h3>Эркюль Пуаро</h3><p class="role"><span class="pg">стр. 176–177</span></p><ul><li>Задумчив: <q>Почему? Каковы мотивы преступника?</q> <span class="pg">стр. 177</span></li><li><q>Надо было быть полным идиотом, чтобы принести оружие убийства к себе в дом</q> <span class="pg">стр. 176</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">подозреваемый</span><div class="portrait">🧥</div><h3>Каст</h3><p class="role">исчез до прихода Кроума <span class="pg">стр. 176</span></p><ul><li>В его комнате нашли <b>бумагу для писем</b>, <b>чулки</b> и <b>новые справочники A. B. C.</b> <span class="pg">стр. 176</span></li></ul></div></div><h2 class="section">Улики и предметы</h2><div class="grid"><div class="card thing"><span class="pin"></span><span class="tag">найдено в комнате Каста</span><div class="portrait">🗂️</div><h3>Улики в комнате Каста</h3><p class="role">обыск Кроума <span class="pg">стр. 176</span></p><ul><li><b>Стопка бумаги для записей</b>, идентичная той, на которой напечатаны письма <span class="pg">стр. 176</span></li><li><b>Большое количество чулочных изделий</b> <span class="pg">стр. 176</span></li><li>За чулками на полке — <b>свёрток с новыми алфавитными справочниками</b> <span class="pg">стр. 176</span></li></ul></div><div class="card thing"><span class="pin"></span><span class="tag">главная улика</span><div class="portrait">🔪</div><h3>Нож за вешалкой</h3><p class="role"><span class="pg">стр. 176</span></p><ul><li>В комнате ножа <b>не было</b> <span class="pg">стр. 176</span></li><li>Кроум отодвинул <b>вешалку в холле</b> от стены — нож был там <span class="pg">стр. 176</span></li><li><b>Засохшая кровь</b> <span class="pg">стр. 176</span></li></ul></div><div class="card thing"><span class="pin"></span><span class="tag">улика</span><div class="portrait">🧦</div><h3>Чулки миссис Ашер</h3><p class="role"><span class="pg">стр. 175</span></p><ul><li>Пару передала Мэри Дроуэр — <b>из того же источника</b>, что остальные <span class="pg">стр. 175</span></li></ul></div></div><h2 class="section">Где</h2><div class="grid"><div class="card place"><span class="pin"></span><span class="tag">гостиницы</span><div class="portrait">🏨</div><h3>«Питт», «Перчатка», «Перина»</h3><p class="role">где останавливался торговец <span class="pg">стр. 175</span></p><ul><li><b>«Питт»</b> — Пейнтон (Керстон); <b>«Перчатка»</b> — Бэксхилл; <b>«Перина»</b> — Андовер <span class="pg">стр. 175</span></li></ul></div><div class="card place"><span class="pin"></span><span class="tag">место действия</span><div class="portrait">🏛️</div><h3>Скотленд-Ярд</h3><p class="role">очередное совещание <span class="pg">стр. 175</span></p></div><div class="card place"><span class="pin"></span><span class="tag">дом Каста</span><div class="portrait">🏘️</div><h3>Дом на Кэмденской дороге</h3><p class="role">обыск, нож за вешалкой <span class="pg">стр. 176</span></p></div></div><h2 class="section">Кто что сделал</h2><div class="links"><span class="pin"></span><div class="link"><span class="chip person">Кроум</span><span class="arrow">обыскивает</span><span class="chip place">комнату Каста</span><span class="arrow">находит</span><span class="chip thing">бумагу, чулки, справочники</span><span><span class="pg">стр. 176</span></span></div><div class="link"><span class="chip person">Кроум</span><span class="arrow">отодвигает вешалку и находит</span><span class="chip thing">нож</span><span><span class="pg">стр. 176</span></span></div><div class="link"><span class="chip person">Пуаро</span><span class="arrow">спрашивает о</span><span>мотиве убийцы <span class="pg">стр. 177</span></span></div></div><h2 class="section">Когда</h2><div class="timeline"><span class="pin"></span><div class="step"><span class="when">Керстон, четверг</span><p>Торговец вернулся в «Питт» около 22:30; поезд из Керстона — 22:05 → Пейнтон 22:15; в Дартмуте шла регата. <span class="pg">стр. 175</span></p></div><div class="step"><span class="when">Бэксхилл</span><p>Остановился в «Перчатке», обошёл около десятка адресов; в Лондон — в 11:30 следующего дня. <span class="pg">стр. 175</span></p></div><div class="step"><span class="when">Андовер</span><p>Остановился в «Перине», предлагал чулки миссис Фаулер. <span class="pg">стр. 175</span></p></div><div class="step"><span class="when">Обыск</span><p>Кроум находит бумагу, чулки, справочники и нож. <span class="pg">стр. 176</span></p></div></div><div class="remember"><span class="pin"></span><h2>📌 Запомни к викторине</h2><ol><li>Гостиницы: <b>«Питт»</b> (Пейнтон), <b>«Перчатка»</b> (Бэксхилл), <b>«Перина»</b> (Андовер).</li><li>В Бэксхилле торговец жил под <b>собственным именем</b>.</li><li>В комнате Каста нашли <b>бумагу для писем</b>, <b>чулки</b> и <b>новые справочники</b>.</li><li>Нож нашли <b>за вешалкой в холле</b>, с засохшей кровью.</li><li>Помощник комиссара предположил <b>сообщника</b>; Пуаро — «маловероятно».</li><li>Пуаро всё ещё мучает вопрос: <b>каков мотив</b>?</li><li>Кроум: преступника не арестовали, потому что он <b>«такой обычный»</b>.</li></ol></div><footer>Источник: А. Кристи, «Убийства по алфавиту», пер. А. С. Петухова (Эксмо, 2015). Страницы указаны по PDF.</footer></div></body></html>

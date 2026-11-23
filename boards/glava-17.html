@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Глава XVII «Ожидание» — доска улик · Убийства по алфавиту</title><style>:root{
+  --cork:#c9a26b; --cork-dark:#a9824e; --paper:#fffaf0; --ink:#2b2118;
+  --muted:#6b5a48; --red:#b3261e; --pin:#d33; --yellow:#fff3b0;
+  --person:#f6e7c8; --thing:#e6eef6; --place:#e3f0e1; --time:#f9e1e1;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);
+  background:
+    radial-gradient(circle at 20% 30%,rgba(0,0,0,.06) 1px,transparent 2px) 0 0/14px 14px,
+    radial-gradient(circle at 70% 60%,rgba(255,255,255,.08) 1px,transparent 2px) 0 0/11px 11px,
+    var(--cork);}
+.board{max-width:1400px;margin:0 auto;padding:28px 28px 40px}
+header{background:var(--paper);padding:16px 24px;border-radius:4px;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);position:relative;margin-bottom:26px;transform:rotate(-.4deg)}
+header h1{margin:0;font-size:30px;letter-spacing:.5px}
+header p{margin:6px 0 0;color:var(--muted);font-size:15px}
+header .narr{display:inline-block;margin-top:8px;background:var(--time);padding:3px 10px;border-radius:12px;font-size:13.5px;color:var(--ink)}
+nav.chap{display:flex;justify-content:space-between;gap:10px;margin:0 0 18px;font-size:14px}
+nav.chap a{background:var(--paper);color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:3px;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.pin{position:absolute;top:-9px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ff8a80,var(--pin) 55%,#7a1010);box-shadow:0 2px 3px rgba(0,0,0,.4)}
+h2.section{display:inline-block;background:var(--ink);color:#fff;font-size:15px;letter-spacing:2px;
+  text-transform:uppercase;padding:6px 14px;margin:8px 0 14px;border-radius:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-bottom:26px}
+.card{background:var(--paper);border-radius:3px;padding:16px 16px 12px;position:relative;
+  box-shadow:0 5px 12px rgba(0,0,0,.28)}
+.card:nth-child(3n+1){transform:rotate(-.8deg)} .card:nth-child(3n+2){transform:rotate(.6deg)}
+.card .tag{position:absolute;top:10px;right:12px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:2px 8px;border-radius:10px;color:var(--muted)}
+.person .tag{background:var(--person)} .thing .tag{background:var(--thing)}
+.place .tag{background:var(--place)}
+.portrait{width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:52px;margin:4px 0 8px;border:3px solid #fff;box-shadow:0 0 0 2px var(--cork-dark)}
+.person .portrait{background:var(--person)} .thing .portrait{background:var(--thing)}
+.place .portrait{background:var(--place)}
+.card h3{margin:0 0 2px;font-size:21px}
+.card .role{color:var(--muted);font-style:italic;margin:0 0 10px;font-size:14px}
+.card ul{margin:0;padding-left:18px} .card li{margin:5px 0;font-size:14.5px;line-height:1.35}
+q{font-style:italic;quotes:"«" "»"} .pg{color:var(--muted);font-size:11.5px;white-space:nowrap}
+.key{background:var(--yellow);padding:0 3px}
+.letter{font-family:"Courier New",Courier,monospace;background:#fff;border:1px solid #ddd;
+  padding:12px 14px;font-size:13.5px;line-height:1.45;margin:8px 0}
+.letter .sig{text-align:right;font-weight:bold;letter-spacing:2px}
+.links{background:var(--paper);border-radius:3px;padding:16px 18px;box-shadow:0 5px 12px rgba(0,0,0,.28);margin-bottom:26px;position:relative}
+.link{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:9px 0;font-size:15px}
+.chip{padding:4px 10px;border-radius:14px;font-weight:bold;border:1px solid rgba(0,0,0,.12)}
+.chip.person{background:var(--person)} .chip.thing{background:var(--thing)} .chip.place{background:var(--place)}
+.arrow{color:var(--red);font-weight:bold}
+.arrow::after{content:" ⟶"}
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;
+  background:var(--paper);border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;margin-bottom:26px}
+.step{padding:16px 16px 14px;border-right:2px dashed var(--cork-dark);position:relative}
+.step:last-child{border-right:none}
+.step .when{display:inline-block;background:var(--red);color:#fff;font-weight:bold;font-size:13px;padding:3px 9px;border-radius:2px}
+.step p{margin:8px 0 0;font-size:14.5px;line-height:1.35}
+.remember{background:var(--yellow);padding:16px 22px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;transform:rotate(.3deg)}
+.remember h2{margin:0 0 8px;font-size:20px}
+.remember ol{margin:0;padding-left:22px;columns:2;column-gap:36px} .remember li{margin:5px 0;font-size:15px;break-inside:avoid}
+footer{margin-top:20px;color:#3d2c1a;font-size:12.5px;text-align:center}
+.bigboard{display:block;position:relative;background:var(--yellow);color:var(--ink);text-decoration:none;padding:18px 22px;margin:0 0 24px;
+  border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);font-size:22px;transform:rotate(-.3deg)}
+.bigboard small{display:block;font-size:14.5px;color:var(--muted);margin-top:4px}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.toc a{display:block;background:var(--paper);color:var(--ink);text-decoration:none;padding:12px 14px;border-radius:3px;box-shadow:0 4px 9px rgba(0,0,0,.25)}
+.toc a b{display:block;font-size:13px;color:var(--muted);letter-spacing:1px}
+@media (max-width:700px){.remember ol{columns:1}}
+@media print{
+  @page{size:A3 landscape;margin:10mm}
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card,header,.remember{transform:none!important}
+  .card,.links,.timeline,.remember{box-shadow:0 0 0 1px #bbb}
+  nav.chap{display:none}
+}
+</style></head><body><div class="board"><nav class="chap"><a href="glava-16.html">← Глава 16</a><a href="index.html">Все главы</a><a href="glava-18.html">Глава 18 →</a></nav><header><span class="pin"></span><h1>🔎 Глава XVII. «Ожидание»</h1><p>Агата Кристи, «Убийства по алфавиту». Все детали и цитаты взяты из текста книги; <span class="pg">стр.</span> — номер страницы в PDF.</p><span class="narr">Рассказывает капитан Гастингс</span></header><h2 class="section">Кто</h2><div class="grid"><div class="card person"><span class="pin"></span><span class="tag">сыщик</span><div class="portrait"><svg viewBox="0 0 100 50" width="70" height="35" aria-label="усы"><path d="M50 22c-6-10-20-12-30-6-6 4-10 2-14-3 0 10 8 18 20 17 10 0 18-4 24-8zM50 22c6-10 20-12 30-6 6 4 10 2 14-3 0 10-8 18-20 17-10 0-18-4-24-8z" fill="#2b2118"/></svg></div><h3>Эркюль Пуаро</h3><p class="role">размышляет, а не бегает <span class="pg">стр. 106</span></p><ul><li><q>Моя сила, Гастингс, в моей голове, а не в моих ногах</q> <span class="pg">стр. 106</span></li><li>Размышляет <b>о мыслях преступника</b>, а не о фактах <span class="pg">стр. 106</span></li><li>С каждым преступлением узнаёт об убийце больше: Андовер — почти ничего, Бэксхилл — больше, Керстон — ещё больше <span class="pg">стр. 106</span></li><li>Факты выглядят <b>противоречиво, словно действовали двое</b> <span class="pg">стр. 107</span></li><li>Имя и адрес убийцы «не явятся», но он поймёт, <b>что это за человек</b> <span class="pg">стр. 107</span></li><li>Потом — к полиции и <b>приманка</b>: как рыбак выбирает <b>муху</b> <span class="pg">стр. 107</span></li><li>Рад одному: <b>невиновных не преследуют</b> <span class="pg">стр. 108</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">рассказчик</span><div class="portrait">📝</div><h3>Капитан Гастингс</h3><p class="role">возмущён бездействием <span class="pg">стр. 106</span></p><ul><li>В газете цитируют то, чего он <b>никогда не говорил</b> <span class="pg">стр. 105</span></li><li>Пуаро шутит: даже простая служанка <b>догадливее</b> него <span class="pg">стр. 109</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">горничная</span><div class="portrait">✍️</div><h3>Мэри Дроуэр</h3><p class="role">пишет Пуаро письмо <span class="pg">стр. 109–110</span></p><ul><li>Едет в <b>Лондон искать работу</b> <span class="pg">стр. 109</span></li><li>Написала <b>Меган</b> — та ответила, что работает в Лондоне в <b>офисе</b>, а живёт в <b>гостинице</b> <span class="pg">стр. 110</span></li><li><q>Одна голова хорошо, но две точно лучше</q> <span class="pg">стр. 109</span></li><li>Почерк — аккуратный, <b>ученический</b> <span class="pg">стр. 109</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">брат жертвы C</span><div class="portrait">🌍</div><h3>Франклин Кларк</h3><p class="role">пишет Пуаро <span class="pg">стр. 110</span></p><ul><li>Сообщает о приезде в Лондон и просит <b>встретиться на следующий день</b> <span class="pg">стр. 110</span></li></ul></div></div><h2 class="section">Улики и предметы</h2><div class="grid"><div class="card thing"><span class="pin"></span><span class="tag">в газетах</span><div class="portrait">📰</div><h3>Заголовки</h3><p class="role">газеты пишут только об A. B. C. <span class="pg">стр. 104–105</span></p><ul><li><b>«Дейли фликер»</b>: «<b>ОН МОЖЕТ БЫТЬ В ВАШЕМ ГОРОДЕ!</b>» <span class="pg">стр. 104</span></li><li><b>«ЧТО НАМ СЕГОДНЯ РАССКАЗАЛ МЕСЬЕ ПУАРО»</b>, <b>«ПУАРО МРАЧНО СМОТРИТ НА СИТУАЦИЮ»</b>, <b>«ПУАРО НА ПОРОГЕ УСПЕХА»</b> <span class="pg">стр. 104–105</span></li><li>Печатают <b>факсимиле писем</b> к Пуаро <span class="pg">стр. 104</span></li><li>Есть <b>запросы в парламент</b> <span class="pg">стр. 104</span></li><li>Андовер <b>по-прежнему не связывают</b> с другими двумя убийствами <span class="pg">стр. 104</span></li></ul></div><div class="card thing"><span class="pin"></span><span class="tag">письмо</span><div class="portrait">💌</div><h3>Письмо Мэри Дроуэр</h3><p class="role"><span class="pg">стр. 109–110</span></p><ul><li>Начинается: <q>УВАЖАЕМЫЙ СЭР!</q> <span class="pg">стр. 109</span></li><li>Оканчивается: <q>Уважающая вас, Мэри Дроуэр</q> <span class="pg">стр. 110</span></li></ul></div></div><h2 class="section">Кто что сделал</h2><div class="links"><span class="pin"></span><div class="link"><span class="chip person">Скотленд-Ярд</span><span class="arrow">решил</span><span>полная публичность — лучший способ найти убийцу <span class="pg">стр. 104</span></span></div><div class="link"><span class="chip person">Пуаро</span><span class="arrow">считает глупые статьи</span><span>помощью: убийца потеряет к нему уважение <span class="pg">стр. 105</span></span></div><div class="link"><span class="chip person">Мэри Дроуэр</span><span class="arrow">пишет</span><span class="chip person">Меган</span><span class="arrow">затем</span><span class="chip person">Пуаро</span><span><span class="pg">стр. 109–110</span></span></div><div class="link"><span class="chip person">Франклин Кларк</span><span class="arrow">просит о встрече</span><span class="chip person">Пуаро</span><span><span class="pg">стр. 110</span></span></div></div><h2 class="section">Когда</h2><div class="timeline"><span class="pin"></span><div class="step"><span class="when">После Керстона</span><p>Дело A. B. C. — на первых полосах; Скотленд-Ярд за максимальную публичность. <span class="pg">стр. 104</span></p></div><div class="step"><span class="when">Расследование</span><p>Полиция проверяет поезда, автобусы, гостиницы, книжные лавки; задержанных отпускают, когда они объясняют, где были. <span class="pg">стр. 105–106</span></p></div><div class="step"><span class="when">Спор</span><p>Гастингс упрекает Пуаро в бездействии; тот объясняет метод. <span class="pg">стр. 106–108</span></p></div><div class="step"><span class="when">Планы</span><p>Пуаро собирается <b>расспросить родных и слуг жертв</b>. Приходят письма Мэри Дроуэр и Франклина Кларка. <span class="pg">стр. 108–110</span></p></div></div><div class="remember"><span class="pin"></span><h2>📌 Запомни к викторине</h2><ol><li>Глава называется <b>«Ожидание»</b>.</li><li>Газета <b>«Дейли фликер»</b>: «<b>Он может быть в вашем городе!</b>»</li><li>Газеты печатают выдуманные слова Пуаро и Гастингса.</li><li>Пуаро: <b>«Моя сила — в голове, а не в ногах»</b>.</li><li>Пуаро думает не о фактах, а о <b>мыслях убийцы</b>.</li><li>Рыбак и <b>«правильная муха»</b> — так Пуаро хочет поймать убийцу.</li><li>Пуаро: на дорогах Англии погибает около <b>140 человек в неделю</b>.</li><li>План Пуаро: расспросить <b>родных, друзей и слуг</b> убитых.</li><li>Мэри Дроуэр написала, что едет в <b>Лондон</b>.</li><li><b>Франклин Кларк</b> просит о встрече.</li></ol></div><footer>Источник: А. Кристи, «Убийства по алфавиту», пер. А. С. Петухова (Эксмо, 2015). Страницы указаны по PDF.</footer></div></body></html>

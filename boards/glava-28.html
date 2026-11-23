@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Глава XXVIII (без названия) — доска улик · Убийства по алфавиту</title><style>:root{
+  --cork:#c9a26b; --cork-dark:#a9824e; --paper:#fffaf0; --ink:#2b2118;
+  --muted:#6b5a48; --red:#b3261e; --pin:#d33; --yellow:#fff3b0;
+  --person:#f6e7c8; --thing:#e6eef6; --place:#e3f0e1; --time:#f9e1e1;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);
+  background:
+    radial-gradient(circle at 20% 30%,rgba(0,0,0,.06) 1px,transparent 2px) 0 0/14px 14px,
+    radial-gradient(circle at 70% 60%,rgba(255,255,255,.08) 1px,transparent 2px) 0 0/11px 11px,
+    var(--cork);}
+.board{max-width:1400px;margin:0 auto;padding:28px 28px 40px}
+header{background:var(--paper);padding:16px 24px;border-radius:4px;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);position:relative;margin-bottom:26px;transform:rotate(-.4deg)}
+header h1{margin:0;font-size:30px;letter-spacing:.5px}
+header p{margin:6px 0 0;color:var(--muted);font-size:15px}
+header .narr{display:inline-block;margin-top:8px;background:var(--time);padding:3px 10px;border-radius:12px;font-size:13.5px;color:var(--ink)}
+nav.chap{display:flex;justify-content:space-between;gap:10px;margin:0 0 18px;font-size:14px}
+nav.chap a{background:var(--paper);color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:3px;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.pin{position:absolute;top:-9px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ff8a80,var(--pin) 55%,#7a1010);box-shadow:0 2px 3px rgba(0,0,0,.4)}
+h2.section{display:inline-block;background:var(--ink);color:#fff;font-size:15px;letter-spacing:2px;
+  text-transform:uppercase;padding:6px 14px;margin:8px 0 14px;border-radius:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-bottom:26px}
+.card{background:var(--paper);border-radius:3px;padding:16px 16px 12px;position:relative;
+  box-shadow:0 5px 12px rgba(0,0,0,.28)}
+.card:nth-child(3n+1){transform:rotate(-.8deg)} .card:nth-child(3n+2){transform:rotate(.6deg)}
+.card .tag{position:absolute;top:10px;right:12px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:2px 8px;border-radius:10px;color:var(--muted)}
+.person .tag{background:var(--person)} .thing .tag{background:var(--thing)}
+.place .tag{background:var(--place)}
+.portrait{width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:52px;margin:4px 0 8px;border:3px solid #fff;box-shadow:0 0 0 2px var(--cork-dark)}
+.person .portrait{background:var(--person)} .thing .portrait{background:var(--thing)}
+.place .portrait{background:var(--place)}
+.card h3{margin:0 0 2px;font-size:21px}
+.card .role{color:var(--muted);font-style:italic;margin:0 0 10px;font-size:14px}
+.card ul{margin:0;padding-left:18px} .card li{margin:5px 0;font-size:14.5px;line-height:1.35}
+q{font-style:italic;quotes:"«" "»"} .pg{color:var(--muted);font-size:11.5px;white-space:nowrap}
+.key{background:var(--yellow);padding:0 3px}
+.letter{font-family:"Courier New",Courier,monospace;background:#fff;border:1px solid #ddd;
+  padding:12px 14px;font-size:13.5px;line-height:1.45;margin:8px 0}
+.letter .sig{text-align:right;font-weight:bold;letter-spacing:2px}
+.links{background:var(--paper);border-radius:3px;padding:16px 18px;box-shadow:0 5px 12px rgba(0,0,0,.28);margin-bottom:26px;position:relative}
+.link{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:9px 0;font-size:15px}
+.chip{padding:4px 10px;border-radius:14px;font-weight:bold;border:1px solid rgba(0,0,0,.12)}
+.chip.person{background:var(--person)} .chip.thing{background:var(--thing)} .chip.place{background:var(--place)}
+.arrow{color:var(--red);font-weight:bold}
+.arrow::after{content:" ⟶"}
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;
+  background:var(--paper);border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;margin-bottom:26px}
+.step{padding:16px 16px 14px;border-right:2px dashed var(--cork-dark);position:relative}
+.step:last-child{border-right:none}
+.step .when{display:inline-block;background:var(--red);color:#fff;font-weight:bold;font-size:13px;padding:3px 9px;border-radius:2px}
+.step p{margin:8px 0 0;font-size:14.5px;line-height:1.35}
+.remember{background:var(--yellow);padding:16px 22px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;transform:rotate(.3deg)}
+.remember h2{margin:0 0 8px;font-size:20px}
+.remember ol{margin:0;padding-left:22px;columns:2;column-gap:36px} .remember li{margin:5px 0;font-size:15px;break-inside:avoid}
+footer{margin-top:20px;color:#3d2c1a;font-size:12.5px;text-align:center}
+.bigboard{display:block;position:relative;background:var(--yellow);color:var(--ink);text-decoration:none;padding:18px 22px;margin:0 0 24px;
+  border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);font-size:22px;transform:rotate(-.3deg)}
+.bigboard small{display:block;font-size:14.5px;color:var(--muted);margin-top:4px}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.toc a{display:block;background:var(--paper);color:var(--ink);text-decoration:none;padding:12px 14px;border-radius:3px;box-shadow:0 4px 9px rgba(0,0,0,.25)}
+.toc a b{display:block;font-size:13px;color:var(--muted);letter-spacing:1px}
+@media (max-width:700px){.remember ol{columns:1}}
+@media print{
+  @page{size:A3 landscape;margin:10mm}
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card,header,.remember{transform:none!important}
+  .card,.links,.timeline,.remember{box-shadow:0 0 0 1px #bbb}
+  nav.chap{display:none}
+}
+</style></head><body><div class="board"><nav class="chap"><a href="glava-27.html">← Глава 27</a><a href="index.html">Все главы</a><a href="glava-29.html">Глава 29 →</a></nav><header><span class="pin"></span><h1>🔎 Глава XXVIII. (без названия)</h1><p>Агата Кристи, «Убийства по алфавиту». Все детали и цитаты взяты из текста книги; <span class="pg">стр.</span> — номер страницы в PDF.</p><span class="narr">⚠️ Глава написана не от лица капитана Гастингса — действие в Скотленд-Ярде и в доме миссис Марбери</span></header><h2 class="section">Кто</h2><div class="grid"><div class="card person"><span class="pin"></span><span class="tag">свидетель</span><div class="portrait">🕺</div><h3>Том Хартиган</h3><p class="role"><b>высокий, приятный</b> молодой человек, парень Лили <span class="pg">стр. 167</span></p><ul><li>Идёт в Скотленд-Ярд к сержанту Джейкобсу и Кроуму — <q>может быть, я напрасно занимаю ваше время</q> <span class="pg">стр. 167</span></li><li>Рассказывает: у матери его девушки <b>на Кэмденской дороге</b> уже <b>больше года</b> снимает комнату на втором этаже <b>мистер Каст</b> <span class="pg">стр. 168</span></li><li>Каст — <q>Пожилой человечек, весь из себя такой рохля</q>; <q>они мухи не обидят</q> <span class="pg">стр. 168</span></li><li>Про <b>Юстонский вокзал</b> и <b>билет в Донкастер</b> — вместо заявленного Челтенхэма <span class="pg">стр. 168</span></li><li>Мать Лили назвала инициалы Каста: <b>А. Б.</b> <span class="pg">стр. 168</span></li><li>Помог установить, что Каст <b>был в отъезде 21 июня</b> — в день убийства в Андовере <span class="pg">стр. 169</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">Скотленд-Ярд</span><div class="portrait">🎓</div><h3>Инспектор Кроум</h3><p class="role">в своём кабинете <span class="pg">стр. 167</span></p><ul><li>За день приходит <b>около 20 посетителей</b> с «важной информацией» по делу A. B. C. <span class="pg">стр. 167</span></li><li>Решает <b>побеседовать с Кастом</b> и вспоминает показания Хилла из Торки <span class="pg">стр. 169–170</span></li><li>Приказывает <b>взять под наблюдение</b> адрес по Кэмденской дороге, <b>не спугнув</b> «пташку» <span class="pg">стр. 170</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">Скотленд-Ярд</span><div class="portrait">🗂️</div><h3>Сержант Джейкобс</h3><p class="role">проводит <b>первичный опрос</b> посетителей <span class="pg">стр. 167</span></p></div><div class="card person"><span class="pin"></span><span class="tag">свидетель</span><div class="portrait">🎬</div><h3>Хилл</h3><p class="role">молодой человек, показания полиции Торки <span class="pg">стр. 170</span></p><ul><li>Выходя из кино после <b>«Ни одна птица»</b>, столкнулся с мужчиной, который <b>говорил сам с собой</b>: <q>А это идея…</q> <span class="pg">стр. 170</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">постоялец</span><div class="portrait">🧥</div><h3>Александр Бонапарт Каст</h3><p class="role">дома на Кэмденской дороге <span class="pg">стр. 169</span> <span class="pg">стр. 172</span></p><ul><li>Вернулся <b>в вечер убийства в Донкастере</b> <span class="pg">стр. 169</span></li><li><b>Покупает много газет</b> — утренние и вечерние; <b>много говорит сам с собой</b> <span class="pg">стр. 169</span></li><li>Получает звонок (<b>женский голос</b>) и <b>врёт</b> хозяйке про рождение племянника — сестры у него нет <span class="pg">стр. 172</span></li><li>Говорит, что уезжает на <b>два-три дня</b> <span class="pg">стр. 172</span></li><li>Уходит с чемоданом, пока миссис Марбери на кухне <span class="pg">стр. 173–174</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">хозяйка</span><div class="portrait">🏠</div><h3>Миссис Марбери</h3><p class="role"><span class="pg">стр. 172–173</span></p><ul><li>Голос по телефону показался ей похожим на <b>Лилин</b>, <q>такой спесивый и гораздо выше, чем у нее</q> <span class="pg">стр. 172</span></li><li>После вести о «рождении» забывает все сомнения и гладит <b>шёлковую комбинацию Лили</b> <span class="pg">стр. 173</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">дочь хозяйки</span><div class="portrait">📞</div><h3>Лили Марбери</h3><p class="role">звонит с вокзала Касту <span class="pg">стр. 171–173</span></p><ul><li>Просит у Тома подождать «полминуты» — звонит «подружке» и возвращается <b>ровно через три минуты</b> <span class="pg">стр. 171</span></li><li>Допытывается: <q>А другого ты там не видел?</q> — про <q>джентльмена из Бельгии</q> <span class="pg">стр. 171–172</span></li><li>Каст: <q>Однажды он наблюдал, как Лили выпускала мышку из мышеловки</q> <span class="pg">стр. 173</span></li></ul></div></div><h2 class="section">Улики и предметы</h2><div class="grid"><div class="card thing"><span class="pin"></span><span class="tag">улика</span><div class="portrait">📞</div><h3>Телефонный звонок</h3><p class="role">женский голос предупреждает Каста <span class="pg">стр. 172–173</span></p><ul><li>«Инспектор из Скотленд-Ярда собирается нанести вам визит» <span class="pg">стр. 173</span></li></ul></div><div class="card thing"><span class="pin"></span><span class="tag">дата</span><div class="portrait">🚢</div><h3>21 июня и корабль Берта Марбери</h3><p class="role">как установили дату <span class="pg">стр. 169</span></p><ul><li>Тогда к миссис Марбери приехал <b>брат Берт из Канады</b>; его корабль пришвартовался в <b>Саутгемптоне</b> <span class="pg">стр. 169</span></li></ul></div></div><h2 class="section">Где</h2><div class="grid"><div class="card place"><span class="pin"></span><span class="tag">место действия</span><div class="portrait">🏛️</div><h3>Скотленд-Ярд</h3><p class="role">кабинет Кроума <span class="pg">стр. 167</span></p></div><div class="card place"><span class="pin"></span><span class="tag">дом Каста</span><div class="portrait">🏘️</div><h3>Дом миссис Марбери, Кэмденская дорога</h3><p class="role">комнаты внаём <span class="pg">стр. 168</span></p></div><div class="card place"><span class="pin"></span><span class="tag">где ели</span><div class="portrait">🍽️</div><h3>«Корнер-хаус»</h3><p class="role">куда Том зовёт Лили на ланч <span class="pg">стр. 171</span></p></div></div><h2 class="section">Кто что сделал</h2><div class="links"><span class="pin"></span><div class="link"><span class="chip person">Том</span><span class="arrow">рассказывает Кроуму о</span><span class="chip person">Касте</span><span><span class="pg">стр. 168–169</span></span></div><div class="link"><span class="chip person">Кроум</span><span class="arrow">вспоминает</span><span class="chip person">Хилла</span><span class="arrow">и фильм «Ни одна птица»</span><span><span class="pg">стр. 170</span></span></div><div class="link"><span class="chip person">Лили</span><span class="arrow">звонит и предупреждает</span><span class="chip person">Каста</span><span><span class="pg">стр. 171–173</span></span></div><div class="link"><span class="chip person">Каст</span><span class="arrow">убегает из</span><span class="chip place">дома на Кэмденской дороге</span><span><span class="pg">стр. 174</span></span></div></div><h2 class="section">Когда</h2><div class="timeline"><span class="pin"></span><div class="step"><span class="when">В Скотленд-Ярде</span><p>Том приходит с историей о Касте; Кроум решает его проверить. <span class="pg">стр. 167–170</span></p></div><div class="step"><span class="when">На набережной</span><p>Том рассказывает Лили; она звонит «подружке». <span class="pg">стр. 171</span></p></div><div class="step"><span class="when">У миссис Марбери</span><p>Каст получает звонок и выдумывает рождение племянника. <span class="pg">стр. 172</span></p></div><div class="step"><span class="when">Бегство</span><p>Каст берёт чемодан и покидает дом. <span class="pg">стр. 173–174</span></p></div></div><div class="remember"><span class="pin"></span><h2>📌 Запомни к викторине</h2><ol><li>Сержант Скотленд-Ярда — <b>Джейкобс</b>.</li><li>Том пришёл в Скотленд-Ярд про <b>Каста</b>: Лили и её мать — хозяйки.</li><li>Каст снимает комнату на <b>Кэмденской дороге</b> уже <b>больше года</b>.</li><li><b>21 июня</b> Каст был в отъезде — совпало с приездом брата миссис Марбери из <b>Канады</b>.</li><li><b>Хилл</b> слышал в Торки, как человек сказал: <b>«А это идея…»</b></li><li>Лили <b>позвонила Касту</b> и изменила голос.</li><li>Каст соврал, что у него <b>родился племянник</b>.</li><li>Каст ушёл с чемоданом до прихода полиции.</li></ol></div><footer>Источник: А. Кристи, «Убийства по алфавиту», пер. А. С. Петухова (Эксмо, 2015). Страницы указаны по PDF.</footer></div></body></html>

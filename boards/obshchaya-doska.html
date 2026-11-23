@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Общая доска: кто есть кто и кто что сделал · Убийства по алфавиту</title>
+<style>
+:root{--cork:#c9a26b;--cork-dark:#a9824e;--paper:#fffaf0;--ink:#2b2118;--muted:#6b5a48;--red:#b3261e;--rel:#7d6a55;
+ --person:#f6e7c8;--thing:#e6eef6;--place:#e3f0e1;--group:#efe4f6;--yellow:#fff3b0}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;font-family:Georgia,"Times New Roman",serif;color:var(--ink)}
+body{display:flex;flex-direction:column;background:var(--cork-dark)}
+#bar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:10px 16px;background:var(--paper);box-shadow:0 2px 8px rgba(0,0,0,.3);z-index:5}
+#bar h1{font-size:19px;margin:0 8px 0 0}
+#bar a{color:var(--ink)}
+.ctl{display:flex;align-items:center;gap:8px;font-size:14px}
+#chSlider{width:240px}
+#chLabel{min-width:290px;font-weight:bold}
+button{font:inherit;font-size:14px;padding:6px 12px;border-radius:4px;border:1px solid #8a7258;background:#fff;cursor:pointer}
+#revealBtn{background:var(--red);color:#fff;border-color:var(--red);font-weight:bold}
+#revealBtn.on{background:#fff;color:var(--red)}
+.legend{display:flex;gap:12px;font-size:13px;align-items:center;margin-left:auto}
+.legend i{display:inline-block;width:26px;height:0;border-top:2px solid var(--rel);vertical-align:middle;margin-right:4px}
+.legend i.act{border-top:3px solid var(--red)}
+.legend b{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:middle;margin-right:3px;border:1px solid rgba(0,0,0,.2)}
+#main{flex:1;display:flex;min-height:0}
+#viewport{flex:1;position:relative;overflow:hidden;cursor:grab;
+ background:radial-gradient(circle at 20% 30%,rgba(0,0,0,.06) 1px,transparent 2px) 0 0/14px 14px,var(--cork)}
+#viewport.drag{cursor:grabbing}
+#world{position:absolute;left:0;top:0;width:2600px;height:1700px;transform-origin:0 0}
+.zone{position:absolute;border:3px dashed rgba(60,40,20,.35);border-radius:14px;background:rgba(255,250,240,.12)}
+.zone h2{position:absolute;top:-2px;left:16px;margin:0;font-size:30px;color:rgba(43,33,24,.7);letter-spacing:1px}
+.zone h2 small{font-size:18px;font-weight:normal;margin-left:10px}
+#M h2{font-size:24px}
+svg#edges{position:absolute;left:0;top:0;width:2600px;height:1700px;overflow:visible;pointer-events:none}
+.edge path{fill:none;stroke:var(--rel);stroke-width:2.2;pointer-events:stroke}
+.edge.act path{stroke:var(--red);stroke-width:3.2}
+.edge.reveal path{stroke:#7a0f9e;stroke-dasharray:9 5;stroke-width:3.6}
+.edge text{font-size:13px;fill:var(--ink);pointer-events:all}
+.edge rect{fill:#fffaf0;stroke:rgba(0,0,0,.15);rx:4}
+.edge.act text{fill:#7a1611;font-weight:bold}
+.edge.reveal text{fill:#5b0b76}
+.edge.dim{opacity:.08}
+.node{position:absolute;width:204px;background:var(--paper);border-radius:4px;padding:8px 10px 8px 64px;min-height:64px;
+ box-shadow:0 4px 9px rgba(0,0,0,.3);cursor:pointer;transition:opacity .2s,box-shadow .2s}
+.node::before{content:"";position:absolute;top:-7px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;
+ background:radial-gradient(circle at 35% 35%,#ff8a80,#d33 55%,#7a1010);box-shadow:0 2px 3px rgba(0,0,0,.4)}
+.node .ic{position:absolute;left:8px;top:8px;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;border:2px solid #fff;box-shadow:0 0 0 1px var(--cork-dark)}
+.node.person .ic{background:var(--person)} .node.thing .ic{background:var(--thing)} .node.place .ic{background:var(--place)} .node.group .ic{background:var(--group)}
+.node.place{border-top:5px solid #5d8f55} .node.thing{border-top:5px solid #5577a0} .node.group{border-top:5px solid #8a5ca8} .node.person{border-top:5px solid #b88a3a}
+.node .nm{font-weight:bold;font-size:15px;line-height:1.15}
+.node .rl{font-size:12.5px;color:var(--muted);font-style:italic;margin-top:3px;line-height:1.2}
+.node .chb{position:absolute;right:6px;bottom:4px;font-size:10.5px;color:var(--muted)}
+.node.killer{box-shadow:0 0 0 4px #7a0f9e,0 4px 9px rgba(0,0,0,.3)}
+.node.killer .rl{color:#7a0f9e;font-weight:bold;font-style:normal}
+.node.framed .rl{color:#7a0f9e;font-weight:bold}
+.node.sel{box-shadow:0 0 0 4px var(--yellow),0 0 0 7px var(--ink),0 6px 14px rgba(0,0,0,.4)}
+.node.dim{opacity:.22}
+.node.hidden,.edge.hidden{display:none}
+#panel{width:340px;background:var(--paper);overflow:auto;padding:16px 18px;box-shadow:-2px 0 8px rgba(0,0,0,.25);font-size:14.5px;line-height:1.4}
+#panel h3{margin:0 0 2px;font-size:20px}
+#panel .rl{color:var(--muted);font-style:italic;margin:0 0 10px}
+#panel ul{padding-left:18px;margin:6px 0 12px} #panel li{margin:4px 0}
+#panel h4{margin:12px 0 4px;font-size:14px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+#panel .cx{margin:6px 0;padding:6px 8px;border-left:4px solid var(--rel);background:#fff}
+#panel .cx.act{border-color:var(--red)} #panel .cx.reveal{border-color:#7a0f9e}
+#panel .cx a{color:var(--ink);font-weight:bold;cursor:pointer;text-decoration:underline dotted}
+#panel q{font-style:italic;quotes:"«" "»"}
+.pg{color:var(--muted);font-size:11.5px;white-space:nowrap}
+#timeline{display:flex;gap:0;background:var(--paper);border-top:2px solid var(--cork-dark);z-index:5}
+#timeline button{flex:1;border:0;border-right:2px dashed var(--cork-dark);border-radius:0;padding:8px 6px;background:transparent;text-align:center;font-size:13.5px}
+#timeline button:last-child{border-right:0}
+#timeline button b{display:block;font-size:15px;color:var(--red)}
+#timeline button.cur{background:var(--yellow)}
+#help{font-size:12.5px;color:var(--muted)}
+@media print{
+ @page{size:A3 landscape;margin:6mm}
+ body{display:block;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ #bar .ctl,#bar .legend button,#panel,#timeline,#help,#bar a{display:none}
+ #main{display:block} #viewport{overflow:visible;background:#fff;height:auto}
+ #world{transform:none!important;zoom:.56;position:relative}
+ .node{box-shadow:0 0 0 1px #999} .node.dim,.edge.dim{opacity:1}
+}
+</style></head>
+<body>
+<div id="bar">
+  <h1>🔎 «Убийства по алфавиту» — кто есть кто и кто что сделал</h1>
+  <a href="index.html">← все главы</a>
+  <div class="ctl">Показать события по <input type="range" id="chSlider" min="1" max="34" value="34"> <span id="chLabel"></span></div>
+  <div class="ctl"><button id="revealBtn">🔓 Показать разгадку</button><button id="fitBtn">⤢ Вся доска</button></div>
+  <div class="legend">
+    <span><i></i>отношения</span><span><i class="act"></i>действия</span>
+    <span><b style="background:var(--person)"></b>люди</span><span><b style="background:var(--thing)"></b>улики</span>
+    <span><b style="background:var(--place)"></b>места</span><span><b style="background:var(--group)"></b>группы</span>
+  </div>
+</div>
+<div id="main">
+  <div id="viewport"><div id="world"><svg id="edges"><defs>
+    <marker id="arAct" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#b3261e"/></marker>
+    <marker id="arRev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#7a0f9e"/></marker>
+  </defs></svg></div></div>
+  <div id="panel"><h3>Как пользоваться</h3>
+    <p>Нажмите на любую карточку — подсветятся все её связи, а здесь появятся детали из книги.</p>
+    <p><b>Колесо мыши</b> — приблизить, <b>перетаскивание</b> — двигать доску.</p>
+    <p><b>Ползунок</b> вверху показывает только то, что известно к выбранной главе.</p>
+    <p><b>Красные</b> нити — действия (убил, нашёл тело, прислал письмо). <b>Серые</b> — отношения (муж, сестра, работает в…).</p>
+    <p>Кнопка <b>«Показать разгадку»</b> открывает, кто настоящий A. B. C. — <i>спойлер!</i></p>
+    <p id="help">Все факты взяты из текста книги; «стр.» — страница PDF.</p></div>
+</div>
+<div id="timeline"></div>
+<script>
+const DATA = {"zones": [{"id": "A", "title": "A — Андовер", "date": "21 июня", "x": 40, "y": 40, "w": 860, "h": 760}, {"id": "B", "title": "B — Бэксхилл-он-Си", "date": "25 июля", "x": 1700, "y": 40, "w": 860, "h": 760}, {"id": "C", "title": "C — Керстон", "date": "30 июля", "x": 40, "y": 880, "w": 860, "h": 780}, {"id": "D", "title": "D — Донкастер", "date": "11 сентября", "x": 1700, "y": 880, "w": 860, "h": 780}, {"id": "M", "title": "Расследование и A. B. C.", "date": "июнь — ноябрь", "x": 940, "y": 40, "w": 720, "h": 1620}], "nodes": [{"id": "poirot", "kind": "person", "icon": "mustache", "name": "Эркюль Пуаро", "role": "сыщик", "ch": 1, "x": 1300, "y": 600, "facts": ["Гордится <b>усами</b>, красит волосы «РЕВИВИТТ» <span class=\"pg\">стр. 10–11</span>", "Получает все письма A. B. C. <span class=\"pg\">стр. 13</span>", "Собирает <b>спецкоманду</b> <span class=\"pg\">стр. 113</span>", "Догадывается про <b>чулки</b> <span class=\"pg\">стр. 137</span>", "Встречается с Кастом в тюрьме <span class=\"pg\">стр. 194</span>", "Объясняет разгадку <span class=\"pg\">стр. 200–217</span>"]}, {"id": "hastings", "kind": "person", "icon": "📝", "name": "Капитан Гастингс", "role": "друг Пуаро, рассказчик", "ch": 1, "x": 1060, "y": 600, "facts": ["Приехал в июне 1935 с <b>ранчо в Южной Америке</b> <span class=\"pg\">стр. 9</span>", "В Донкастере охраняет <b>Мэри Дроуэр</b> <span class=\"pg\">стр. 151</span>", "Его замечание про ошибку в адресе помогает Пуаро <span class=\"pg\">стр. 211</span>"]}, {"id": "abc", "kind": "person", "icon": "❓", "name": "A. B. C.", "role": "неизвестный автор писем", "revealRole": "= Франклин Кларк", "ch": 1, "x": 1300, "y": 370, "facts": ["Подписывает письма Пуаро буквами <b>A. B. C.</b> <span class=\"pg\">стр. 13</span>", "Убивает по алфавиту: <b>A, B, C, D</b>", "Оставляет у тел <b>справочник A. B. C.</b> <span class=\"pg\">стр. 27</span>"]}, {"id": "letters", "kind": "thing", "icon": "✉️", "name": "Письма A. B. C.", "role": "4 письма, на машинке", "ch": 1, "x": 1300, "y": 150, "facts": ["1-е: <b>Андовер, 21-е</b> <span class=\"pg\">стр. 13</span>", "2-е: <b>Бэксхилл, 25 июля</b> (из Хэмпстеда) <span class=\"pg\">стр. 52–53</span>", "3-е: <b>Керстон, 30-е</b> — ошибка в адресе «Уайтхорс» <span class=\"pg\">стр. 87–88</span>", "4-е: <b>Донкастер, 11 сентября</b> <span class=\"pg\">стр. 132</span>"]}, {"id": "guide", "kind": "thing", "icon": "📖", "name": "Справочник A. B. C.", "role": "алфавитный ж/д справочник", "ch": 4, "x": 1540, "y": 370, "facts": ["Андовер: на прилавке, открыт на странице Андовера <span class=\"pg\">стр. 27</span> <span class=\"pg\">стр. 35</span>", "Бэксхилл: под телом <span class=\"pg\">стр. 56</span>", "Керстон: рядом с телом <span class=\"pg\">стр. 93</span>", "Донкастер: под креслом <span class=\"pg\">стр. 154</span>"]}, {"id": "japp", "kind": "person", "icon": "📁", "name": "Старший инспектор Джепп", "role": "Скотленд-Ярд", "ch": 1, "x": 1060, "y": 370, "facts": ["Считает первое письмо <b>«глупой мистификацией»</b> <span class=\"pg\">стр. 14</span>", "Звонит Пуаро: убита миссис Ашер <span class=\"pg\">стр. 21–22</span>", "Тревожится из-за алиби Каста <span class=\"pg\">стр. 183</span>"]}, {"id": "crome", "kind": "person", "icon": "🎓", "name": "Инспектор Кроум", "role": "ведёт дело, Скотленд-Ярд", "ch": 8, "x": 1540, "y": 600, "facts": ["Молодой, заносчивый: <b>«Да неужели?»</b> <span class=\"pg\">стр. 57</span>", "Версия про виски <b>«Белая лошадь»</b> <span class=\"pg\">стр. 90</span>", "Находит нож за вешалкой <span class=\"pg\">стр. 176</span>", "Арестовывает убийцу в финале <span class=\"pg\">стр. 215</span>"]}, {"id": "thompson", "kind": "person", "icon": "🧠", "name": "Доктор Томпсон", "role": "психиатр", "ch": 8, "x": 1060, "y": 830, "facts": ["«Комплекс алфавита» <span class=\"pg\">стр. 54</span>", "Диагноз: <b>«Паранойя»</b> <span class=\"pg\">стр. 82</span>", "Гипотеза про <b>имя Пуаро</b> (Геркулес) <span class=\"pg\">стр. 183</span>"]}, {"id": "lionel", "kind": "person", "icon": "🏛️", "name": "Сэр Лайонелл", "role": "помощник комиссара", "ch": 13, "x": 1540, "y": 830, "facts": ["Решает вопрос об <b>огласке</b> <span class=\"pg\">стр. 79</span>", "Совещание в Скотленд-Ярде <span class=\"pg\">стр. 175</span>"]}, {"id": "team", "kind": "group", "icon": "🤝", "name": "Спецкоманда", "role": "родные и близкие жертв", "ch": 18, "x": 1300, "y": 830, "facts": ["Идея <b>Франклина Кларка</b>, он платит всем <span class=\"pg\">стр. 111–112</span>", "Участники: Франклин, Тора Грей, Меган, Дон, Мэри Дроуэр <span class=\"pg\">стр. 113</span>", "Вместе едут в <b>Донкастер</b> 11 сентября <span class=\"pg\">стр. 145</span>"]}, {"id": "cust", "kind": "person", "icon": "🧥", "name": "Александр Бонапарт Каст", "role": "торговец чулками", "revealRole": "подставлен убийцей", "ch": 2, "x": 1300, "y": 1080, "facts": ["Инициалы по-английски — <b>A. B. C.</b> <span class=\"pg\">сноска 12</span>", "Близорукий, сутулый, эпилептик <span class=\"pg\">стр. 16</span> <span class=\"pg\">стр. 181</span>", "Продаёт <b>чулки</b> в городах всех убийств <span class=\"pg\">стр. 175</span>", "Кровь на рукаве, нож в кармане после кино <span class=\"pg\">стр. 155</span>", "Сам приходит в полицию Андовера <span class=\"pg\">стр. 180</span>", "Говорит Пуаро: <b>«я знаю»</b>, но «почему — не знаю» <span class=\"pg\">стр. 199</span>"]}, {"id": "stockings", "kind": "thing", "icon": "🧦", "name": "Чулки", "role": "главная улика Пуаро", "ch": 6, "x": 1060, "y": 1080, "facts": ["Новые чулки в спальне миссис Ашер <span class=\"pg\">стр. 37</span>", "Мать Бетти купила чулки у торговца <span class=\"pg\">стр. 137</span>", "Тора говорила с продавцом чулок на крыльце <span class=\"pg\">стр. 136</span>", "Чемодан Каста: коробки с шёлковыми чулками <span class=\"pg\">стр. 165–166</span>"]}, {"id": "typewriter", "kind": "thing", "icon": "⌨️", "name": "Пишущая машинка", "role": "на ней напечатаны письма", "ch": 33, "x": 1540, "y": 1080, "facts": ["Найдена в комнате Каста <span class=\"pg\">стр. 197</span>", "Каст: её прислала «фирма» <span class=\"pg\">стр. 197</span>"]}, {"id": "knife", "kind": "thing", "icon": "🔪", "name": "Нож", "role": "орудие убийства D", "ch": 25, "x": 1540, "y": 1290, "facts": ["В кармане у Каста, в крови <span class=\"pg\">стр. 155</span>", "Спрятан за вешалкой в холле <span class=\"pg\">стр. 176</span>"]}, {"id": "marbury", "kind": "group", "icon": "🏘️", "name": "Миссис Марбери и Лили", "role": "хозяйки, Кэмденская дорога", "ch": 22, "x": 1060, "y": 1290, "facts": ["Сдают Касту комнату больше года <span class=\"pg\">стр. 168</span>", "Лили звонит Касту и предупреждает <span class=\"pg\">стр. 172–173</span>"]}, {"id": "tom", "kind": "person", "icon": "🕺", "name": "Том Хартиган", "role": "парень Лили", "ch": 22, "x": 1300, "y": 1290, "facts": ["Видел Каста на <b>Юстоне</b> с билетом в Донкастер <span class=\"pg\">стр. 142–143</span>", "Приходит с этим в Скотленд-Ярд <span class=\"pg\">стр. 167</span>"]}, {"id": "strange", "kind": "person", "icon": "⛏️", "name": "Мистер Стрэндж", "role": "горный инженер", "ch": 31, "x": 1300, "y": 1500, "facts": ["Даёт Касту алиби на Бэксхилл: <b>домино в Истборне</b> до 00:10 <span class=\"pg\">стр. 183–184</span>", "Пуаро: ошибиться на день легко <span class=\"pg\">стр. 198</span>"]}, {"id": "townA", "kind": "place", "icon": "🚬", "name": "Андовер", "role": "табачная лавка миссис Ашер", "ch": 1, "x": 470, "y": 130, "facts": ["Лавка в переулке, на вывеске «А. Ашер» <span class=\"pg\">стр. 34</span>", "Начинается на <b>A</b> <span class=\"pg\">сноска 10</span>"]}, {"id": "asher", "kind": "person", "icon": "🕯️", "name": "Миссис Алиса Ашер", "role": "жертва A, ≈ 60 лет", "ch": 3, "x": 470, "y": 340, "facts": ["Убита <b>ударом по затылку</b> между 17:30 и 18:05 <span class=\"pg\">стр. 23</span>", "Деньги в кассе не тронуты <span class=\"pg\">стр. 24</span>", "Раньше служила у мисс Роуз <span class=\"pg\">стр. 23</span>"]}, {"id": "franz", "kind": "person", "icon": "🍺", "name": "Франц Ашер", "role": "муж, немец, пьяница", "ch": 3, "x": 190, "y": 340, "facts": ["Бывший официант <span class=\"pg\">стр. 23</span>", "Грозился убить жену <span class=\"pg\">стр. 24</span>", "Задержан, но письма снимают с него подозрение <span class=\"pg\">стр. 26</span> <span class=\"pg\">стр. 84</span>"]}, {"id": "mary", "kind": "person", "icon": "✍️", "name": "Мэри Дроуэр", "role": "племянница, горничная", "ch": 4, "x": 750, "y": 340, "facts": ["Темноволосая, работает под Овертоном <span class=\"pg\">стр. 30</span>", "Пишет Пуаро и входит в спецкоманду <span class=\"pg\">стр. 109</span> <span class=\"pg\">стр. 113</span>", "Фамилия на «Д» — Гастингс охраняет её <span class=\"pg\">стр. 151</span>"]}, {"id": "glen", "kind": "person", "icon": "👋", "name": "Инспектор Глен", "role": "полиция Андовера", "ch": 4, "x": 190, "y": 580, "facts": ["Высокий светловолосый <span class=\"pg\">стр. 23</span>", "Задерживает Франца Ашера <span class=\"pg\">стр. 26</span>"]}, {"id": "witA", "kind": "group", "icon": "👥", "name": "Свидетели Андовера", "role": "", "ch": 4, "x": 560, "y": 600, "facts": ["<b>Констебль Доувер</b> — нашёл тело <span class=\"pg\">стр. 23</span>", "<b>Партридж</b> — покупал табак в 17:30 <span class=\"pg\">стр. 43–44</span>", "<b>Ридделл</b> — заходил в 18:00 <span class=\"pg\">стр. 47</span>", "<b>Миссис Фаулер</b> — соседка <span class=\"pg\">стр. 40</span>", "<b>Доктор Керр</b> — судмедэксперт <span class=\"pg\">стр. 29</span>"]}, {"id": "townB", "kind": "place", "icon": "🏖️", "name": "Бэксхилл", "role": "кафе «Рыжая кошка», пляж", "ch": 8, "x": 2130, "y": 130, "facts": ["Кафе на набережной, оранжевые скатерти <span class=\"pg\">стр. 60</span>", "Тело нашли на пляже <span class=\"pg\">стр. 56</span>", "Начинается на <b>B</b> <span class=\"pg\">сноска 28</span>"]}, {"id": "betty", "kind": "person", "icon": "🤍", "name": "Элизабет (Бетти) Барнард", "role": "жертва B, 23 года", "ch": 9, "x": 2130, "y": 340, "facts": ["Официантка «Рыжей кошки» <span class=\"pg\">стр. 56</span>", "Задушена <b>своим поясом</b> между 00:00 и 01:00 <span class=\"pg\">стр. 58–59</span>", "Тайно ездила в Истборн с женатым мужчиной <span class=\"pg\">стр. 73</span>"]}, {"id": "megan", "kind": "person", "icon": "🎎", "name": "Меган Барнард", "role": "сестра Бетти", "ch": 10, "x": 1860, "y": 340, "facts": ["Похожа на <b>голландскую куклу</b>, чёлка <span class=\"pg\">стр. 67</span>", "Работает в Лондоне <span class=\"pg\">стр. 65</span>", "На вопрос «хотите правду?» отвечает <b>«Нет!»</b> <span class=\"pg\">стр. 191</span>"]}, {"id": "don", "kind": "person", "icon": "🦰", "name": "Дональд Фрэйзер", "role": "жених Бетти", "ch": 10, "x": 2400, "y": 340, "facts": ["Рыжий, веснушчатый, ревнивый <span class=\"pg\">стр. 75</span> <span class=\"pg\">стр. 72</span>", "Искал Бетти в Сент-Леонардсе и Гастингсе <span class=\"pg\">стр. 77</span>", "Сон: душит Бетти, а лицо — Меган <span class=\"pg\">стр. 132</span>"]}, {"id": "barnards", "kind": "group", "icon": "🏡", "name": "Мистер и миссис Барнард", "role": "родители Бетти", "ch": 10, "x": 2400, "y": 580, "facts": ["Бунгало «Лландидно» <span class=\"pg\">стр. 64</span>", "Миссис Барнард — валлийка <span class=\"pg\">стр. 65</span>", "Мать купила Бетти чулки <span class=\"pg\">стр. 117</span>"]}, {"id": "witB", "kind": "group", "icon": "👥", "name": "Свидетели Бэксхилла", "role": "", "ch": 9, "x": 1930, "y": 600, "facts": ["<b>Полковник Джером</b> — нашёл тело с собакой <span class=\"pg\">стр. 59</span>", "<b>Мисс Мэррион</b> — хозяйка кафе <span class=\"pg\">стр. 61</span>", "<b>Милли Хигли</b> — официантка <span class=\"pg\">стр. 62</span>", "<b>Инспекторы Келси и Картер</b> <span class=\"pg\">стр. 58–59</span>"]}, {"id": "townC", "kind": "place", "icon": "🏠", "name": "Керстон, Комбсайд", "role": "дом сэра Кармайкла, Девоншир", "ch": 14, "x": 470, "y": 970, "facts": ["Белый четырёхугольный дом, две галереи <span class=\"pg\">стр. 93</span>", "Население Керстона — 554 человека <span class=\"pg\">стр. 88</span>", "Начинается на <b>C</b> <span class=\"pg\">сноска 44</span>"]}, {"id": "carmichael", "kind": "person", "icon": "🏺", "name": "Сэр Кармайкл Кларк", "role": "жертва C, коллекционер", "ch": 14, "x": 470, "y": 1180, "facts": ["Бывший отоларинголог, собирал <b>китайский фарфор</b> <span class=\"pg\">стр. 90</span>", "Убит ударом по затылку на вечерней прогулке <span class=\"pg\">стр. 93</span>"]}, {"id": "franklin", "kind": "person", "icon": "🌍", "name": "Франклин Кларк", "role": "брат сэра Кармайкла", "revealRole": "УБИЙЦА — настоящий A. B. C.", "ch": 15, "x": 780, "y": 1180, "facts": ["Крупный, загорелый, вернулся с Востока <span class=\"pg\">стр. 94–95</span>", "Создаёт спецкоманду <span class=\"pg\">стр. 111</span>", "Состояние брата <b>достанется ему</b> <span class=\"pg\">стр. 112</span>"]}, {"id": "lady", "kind": "person", "icon": "💊", "name": "Леди Кларк (Шарлотта)", "role": "жена, тяжело больна", "ch": 15, "x": 190, "y": 1180, "facts": ["Неизлечимый рак, морфин <span class=\"pg\">стр. 95</span> <span class=\"pg\">стр. 98</span>", "Видела Тору с незнакомцем на крыльце <span class=\"pg\">стр. 129</span>"]}, {"id": "thora", "kind": "person", "icon": "❄️", "name": "Тора Грей", "role": "секретарша, ≈ 27 лет", "ch": 15, "x": 470, "y": 1420, "facts": ["Почти белые волосы, серые глаза <span class=\"pg\">стр. 97</span>", "Вспоминает <b>продавца чулок</b> <span class=\"pg\">стр. 136</span>", "Ушла из Комбсайда: её выгнала леди Кларк <span class=\"pg\">стр. 123</span>"]}, {"id": "witC", "kind": "group", "icon": "👥", "name": "Люди Комбсайда", "role": "", "ch": 15, "x": 190, "y": 1440, "facts": ["<b>Деверил</b> — пожилой дворецкий <span class=\"pg\">стр. 93</span>", "<b>Инспектор Уэллс</b> — местная полиция <span class=\"pg\">стр. 94</span>", "<b>Сестра Капстик</b> — сиделка <span class=\"pg\">стр. 125</span>"]}, {"id": "cane", "kind": "thing", "icon": "🦯", "name": "Трость со свинцом", "role": "найдена в Комбсайде", "ch": 34, "reveal": true, "x": 780, "y": 1440, "facts": ["Набалдашник залит свинцом <span class=\"pg\">стр. 214</span>", "Орудие убийств в Андовере и Керстоне <span class=\"pg\">стр. 214</span>"]}, {"id": "townD", "kind": "place", "icon": "🎦", "name": "Донкастер", "role": "кинотеатр, гостиница «Чёрный лебедь»", "ch": 20, "x": 2130, "y": 970, "facts": ["11 сентября — скачки <b>Сент-Леджер</b> <span class=\"pg\">стр. 134</span>", "Каст жил в «Чёрном лебеде» <span class=\"pg\">стр. 155</span>", "Начинается на <b>D</b> <span class=\"pg\">сноска 72</span>"]}, {"id": "earlsfield", "kind": "person", "icon": "💈", "name": "Джордж Эрлсфилд", "role": "жертва, парикмахер", "ch": 24, "x": 2130, "y": 1180, "facts": ["Убит <b>ножом в спину</b> в кинотеатре <span class=\"pg\">стр. 160</span>", "Фамилия на <b>E</b>, а не на D <span class=\"pg\">сноска 81</span>", "Имя названо в гл. XXVII <span class=\"pg\">стр. 160</span>"]}, {"id": "downes", "kind": "person", "icon": "🐸", "name": "Роджер Доунз", "role": "учитель, сидел рядом", "ch": 27, "x": 2400, "y": 1180, "facts": ["Похож на лягушку из «Алисы» <span class=\"pg\">стр. 160</span>", "Фамилия на <b>D</b> — удар, видимо, предназначался ему <span class=\"pg\">стр. 162</span> <span class=\"pg\">сноска 82</span>"]}, {"id": "witD", "kind": "group", "icon": "👥", "name": "Свидетели Донкастера", "role": "", "ch": 23, "x": 1860, "y": 1180, "facts": ["<b>Лидбеттер</b> — сосед в кино <span class=\"pg\">стр. 153</span>", "<b>Джеймсон</b> — служитель кинотеатра <span class=\"pg\">стр. 158</span>", "<b>Мистер Болл</b> и <b>Мэри Строуд</b> — «Чёрный лебедь» <span class=\"pg\">стр. 163–164</span>", "<b>Полковник Андерсон</b> — главный констебль <span class=\"pg\">стр. 147</span>"]}], "edges": [{"from": "abc", "to": "letters", "type": "act", "label": "пишет", "ch": 1, "pg": "13"}, {"from": "letters", "to": "poirot", "type": "act", "label": "адресованы", "ch": 1, "pg": "13"}, {"from": "hastings", "to": "poirot", "type": "rel", "label": "старый друг", "ch": 1, "pg": "9"}, {"from": "poirot", "to": "japp", "type": "act", "label": "показывает письмо", "ch": 1, "pg": "14", "quote": "глупая мистификация"}, {"from": "letters", "to": "townA", "type": "act", "label": "1-е письмо: Андовер, 21-е", "ch": 1, "pg": "13"}, {"from": "abc", "to": "asher", "type": "act", "label": "убийство A", "ch": 3, "pg": "22"}, {"from": "asher", "to": "townA", "type": "rel", "label": "хозяйка лавки", "ch": 3, "pg": "22"}, {"from": "franz", "to": "asher", "type": "rel", "label": "муж", "ch": 3, "pg": "22"}, {"from": "franz", "to": "asher", "type": "act", "label": "грозился убить", "ch": 4, "pg": "24", "quote": "оторвет ей голову"}, {"from": "glen", "to": "franz", "type": "act", "label": "задерживает", "ch": 4, "pg": "26"}, {"from": "mary", "to": "asher", "type": "rel", "label": "племянница", "ch": 4, "pg": "24"}, {"from": "witA", "to": "asher", "type": "act", "label": "нашёл тело / видели последними", "ch": 4, "pg": "23"}, {"from": "abc", "to": "guide", "type": "act", "label": "оставляет у тел", "ch": 4, "pg": "27"}, {"from": "guide", "to": "townA", "type": "act", "label": "на прилавке", "ch": 4, "pg": "27"}, {"from": "japp", "to": "crome", "type": "rel", "label": "коллеги", "ch": 8, "pg": "53"}, {"from": "letters", "to": "townB", "type": "act", "label": "2-е письмо: 25 июля", "ch": 8, "pg": "52"}, {"from": "abc", "to": "betty", "type": "act", "label": "убийство B", "ch": 9, "pg": "56"}, {"from": "betty", "to": "townB", "type": "rel", "label": "официантка кафе", "ch": 9, "pg": "56"}, {"from": "witB", "to": "betty", "type": "act", "label": "нашёл тело (Джером)", "ch": 9, "pg": "59"}, {"from": "crome", "to": "abc", "type": "act", "label": "ведёт розыск", "ch": 9, "pg": "57"}, {"from": "megan", "to": "betty", "type": "rel", "label": "сестра", "ch": 10, "pg": "65", "quote": "Бетти была законченной маленькой идиоткой!"}, {"from": "barnards", "to": "betty", "type": "rel", "label": "родители", "ch": 10, "pg": "64"}, {"from": "don", "to": "betty", "type": "rel", "label": "жених, ревновал", "ch": 10, "pg": "66"}, {"from": "don", "to": "betty", "type": "act", "label": "грозил (со слов Меган)", "ch": 11, "pg": "73", "quote": "Он убьет ее"}, {"from": "thompson", "to": "abc", "type": "act", "label": "ставит диагноз", "ch": 13, "pg": "82", "quote": "Паранойя"}, {"from": "lionel", "to": "crome", "type": "rel", "label": "начальник", "ch": 13, "pg": "79"}, {"from": "letters", "to": "townC", "type": "act", "label": "3-е письмо: 30-е, не тот адрес", "ch": 14, "pg": "87"}, {"from": "abc", "to": "carmichael", "type": "act", "label": "убийство C", "ch": 14, "pg": "90"}, {"from": "carmichael", "to": "townC", "type": "rel", "label": "хозяин дома", "ch": 15, "pg": "93"}, {"from": "franklin", "to": "carmichael", "type": "rel", "label": "единственный брат", "ch": 15, "pg": "94"}, {"from": "lady", "to": "carmichael", "type": "rel", "label": "жена", "ch": 15, "pg": "95"}, {"from": "thora", "to": "carmichael", "type": "rel", "label": "секретарша", "ch": 15, "pg": "97"}, {"from": "witC", "to": "carmichael", "type": "rel", "label": "дворецкий, сиделка", "ch": 15, "pg": "93"}, {"from": "franklin", "to": "team", "type": "act", "label": "создаёт и платит", "ch": 18, "pg": "111"}, {"from": "poirot", "to": "team", "type": "act", "label": "руководит", "ch": 18, "pg": "113"}, {"from": "thora", "to": "team", "type": "rel", "label": "участница", "ch": 18, "pg": "113"}, {"from": "megan", "to": "team", "type": "rel", "label": "участница", "ch": 18, "pg": "113"}, {"from": "don", "to": "team", "type": "rel", "label": "участник", "ch": 18, "pg": "113"}, {"from": "mary", "to": "team", "type": "rel", "label": "участница", "ch": 18, "pg": "113"}, {"from": "lady", "to": "thora", "type": "act", "label": "выгнала, зовёт «лгуньей»", "ch": 20, "pg": "123, 128", "quote": "Эта девушка – лгунья"}, {"from": "don", "to": "megan", "type": "act", "label": "сон: лицо Меган", "ch": 20, "pg": "132"}, {"from": "letters", "to": "townD", "type": "act", "label": "4-е письмо: 11 сентября", "ch": 20, "pg": "132"}, {"from": "thora", "to": "cust", "type": "act", "label": "говорила с «продавцом чулок»", "ch": 21, "pg": "136"}, {"from": "poirot", "to": "stockings", "type": "act", "label": "догадка про чулки", "ch": 21, "pg": "137"}, {"from": "marbury", "to": "cust", "type": "rel", "label": "сдают комнату", "ch": 22, "pg": "168"}, {"from": "tom", "to": "cust", "type": "act", "label": "видел билет в Донкастер", "ch": 22, "pg": "142"}, {"from": "hastings", "to": "mary", "type": "act", "label": "охраняет", "ch": 23, "pg": "151"}, {"from": "abc", "to": "earlsfield", "type": "act", "label": "убийство D", "ch": 24, "pg": "154"}, {"from": "earlsfield", "to": "townD", "type": "rel", "label": "убит в кино", "ch": 24, "pg": "154"}, {"from": "witD", "to": "earlsfield", "type": "act", "label": "нашли тело", "ch": 24, "pg": "154"}, {"from": "cust", "to": "townD", "type": "act", "label": "был в кино, кровь на рукаве", "ch": 25, "pg": "155"}, {"from": "knife", "to": "cust", "type": "act", "label": "в кармане", "ch": 25, "pg": "155"}, {"from": "downes", "to": "earlsfield", "type": "act", "label": "сидел рядом", "ch": 27, "pg": "162", "quote": "Готов съесть свою собственную шляпу, если этот удар ножом не предназначался для вас"}, {"from": "witD", "to": "cust", "type": "act", "label": "видела кровь в раковине", "ch": 27, "pg": "164"}, {"from": "cust", "to": "stockings", "type": "act", "label": "торгует чулками", "ch": 27, "pg": "166"}, {"from": "tom", "to": "crome", "type": "act", "label": "сообщает о Касте", "ch": 28, "pg": "168"}, {"from": "marbury", "to": "cust", "type": "act", "label": "Лили предупреждает по телефону", "ch": 28, "pg": "173"}, {"from": "crome", "to": "knife", "type": "act", "label": "находит за вешалкой", "ch": 29, "pg": "176"}, {"from": "cust", "to": "townA", "type": "act", "label": "возвращается, сдаётся полиции", "ch": 30, "pg": "180"}, {"from": "strange", "to": "cust", "type": "act", "label": "алиби: домино в Истборне", "ch": 31, "pg": "183"}, {"from": "cust", "to": "typewriter", "type": "rel", "label": "машинка в его комнате", "ch": 33, "pg": "197"}, {"from": "poirot", "to": "cust", "type": "act", "label": "встреча в тюрьме", "ch": 33, "pg": "195", "quote": "Я именно тот человек, которому вы писали письма"}, {"from": "franklin", "to": "abc", "type": "act", "label": "это он!", "ch": 34, "pg": "208", "reveal": true}, {"from": "franklin", "to": "cust", "type": "act", "label": "подставил: чулки, справочники, машинка", "ch": 34, "pg": "210", "reveal": true}, {"from": "franklin", "to": "carmichael", "type": "act", "label": "убил ради наследства", "ch": 34, "pg": "208–209", "reveal": true}, {"from": "franklin", "to": "thora", "type": "act", "label": "боялся её брака с братом", "ch": 34, "pg": "209", "reveal": true}, {"from": "franklin", "to": "betty", "type": "act", "label": "обедал с ней, «женатый»", "ch": 34, "pg": "210", "reveal": true}, {"from": "franklin", "to": "cane", "type": "act", "label": "его трость", "ch": 34, "pg": "214", "reveal": true}, {"from": "poirot", "to": "franklin", "type": "act", "label": "разоблачает", "ch": 34, "pg": "215", "reveal": true, "quote": "совсем не английское преступление"}, {"from": "crome", "to": "franklin", "type": "act", "label": "арестовывает", "ch": 34, "pg": "215", "reveal": true}], "titles": {"1": "Глава I. «Письмо»", "2": "Глава II. (без названия)", "3": "Глава III. «Андовер»", "4": "Глава IV. «Миссис Ашер»", "5": "Глава V. «Мэри Дроуэр»", "6": "Глава VI. «Место преступления»", "7": "Глава VII. «Мистер Партридж и мистер Ридделл»", "8": "Глава VIII. «Второе письмо»", "9": "Глава IX. «Убийство в Бэксхилл-он-Си»", "10": "Глава X. «Барнарды»", "11": "Глава XI. «Меган Барнард»", "12": "Глава XII. «Дональд Фрэйзер»", "13": "Глава XIII. «Совещание»", "14": "Глава XIV. «Третье письмо»", "15": "Глава XV. «Сэр Кармайкл Кларк»", "16": "Глава XVI. (без названия)", "17": "Глава XVII. «Ожидание»", "18": "Глава XVIII. «Пуаро произносит речь»", "19": "Глава XIX. «Шведская интерлюдия»", "20": "Глава XX. «Леди Кларк»", "21": "Глава XXI. «Описание убийцы»", "22": "Глава XXII. (без названия)", "23": "Глава XXIII. «11 сентября. Донкастер»", "24": "Глава XXIV. (без названия)", "25": "Глава XXV. (без названия)", "26": "Глава XXVI. (без названия)", "27": "Глава XXVII. «Убийство в Донкастере»", "28": "Глава XXVIII. (без названия)", "29": "Глава XXIX. «В Скотленд-Ярде»", "30": "Глава XXX. (без названия)", "31": "Глава XXXI. «Эркюль Пуаро задает вопросы…»", "32": "Глава XXXII. «…и рассуждает об охоте на лис»", "33": "Глава XXXIII. «Александр Бонапарт Каст»", "34": "Глава XXXIV. «Пуаро объясняет»"}, "roman": ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV"], "mustache": "<svg viewBox=\"0 0 100 50\" width=\"46\" height=\"23\" aria-label=\"усы\"><path d=\"M50 22c-6-10-20-12-30-6-6 4-10 2-14-3 0 10 8 18 20 17 10 0 18-4 24-8zM50 22c6-10 20-12 30-6 6 4 10 2 14-3 0 10-8 18-20 17-10 0-18-4-24-8z\" fill=\"#2b2118\"/></svg>"};
+const W = document.getElementById('world'), VP = document.getElementById('viewport'), SV = document.getElementById('edges');
+const S = {ch: 34, reveal: false, sel: null, k: 1, x: 0, y: 0};
+const byId = {}; DATA.nodes.forEach(n => byId[n.id] = n);
+const RN = DATA.roman;
+
+// zones
+DATA.zones.forEach(z => {
+  const d = document.createElement('div'); d.className = 'zone'; d.id = z.id;
+  Object.assign(d.style, {left: z.x + 'px', top: z.y + 'px', width: z.w + 'px', height: z.h + 'px'});
+  d.innerHTML = `<h2>${z.title}<small>${z.date}</small></h2>`; W.insertBefore(d, SV);
+});
+// nodes
+DATA.nodes.forEach(n => {
+  const d = document.createElement('div'); d.className = 'node ' + n.kind; d.id = 'n-' + n.id;
+  d.innerHTML = `<div class="ic">${n.icon === 'mustache' ? DATA.mustache : n.icon}</div><div class="nm">${n.name}</div><div class="rl">${n.role || ''}</div><div class="chb">с гл. ${RN[n.ch]}</div>`;
+  W.appendChild(d); n.el = d;
+  d.addEventListener('click', e => { e.stopPropagation(); select(n.id); });
+});
+function place() {
+  DATA.nodes.forEach(n => { n.w = n.el.offsetWidth; n.h = n.el.offsetHeight; n.el.style.left = (n.x - n.w / 2) + 'px'; n.el.style.top = (n.y - n.h / 2) + 'px'; });
+}
+// edges
+const NS = 'http://www.w3.org/2000/svg';
+const pairCount = {}, pairIdx = {};
+DATA.edges.forEach(e => { const k = [e.from, e.to].sort().join('|'); pairCount[k] = (pairCount[k] || 0) + 1; });
+DATA.edges.forEach((e, i) => {
+  const k = [e.from, e.to].sort().join('|'); pairIdx[k] = (pairIdx[k] || 0); e.off = (pairIdx[k] - (pairCount[k] - 1) / 2) * 70; pairIdx[k]++;
+  const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'edge ' + e.type + (e.reveal ? ' reveal' : ''));
+  const p = document.createElementNS(NS, 'path'); const r = document.createElementNS(NS, 'rect'); const t = document.createElementNS(NS, 'text');
+  if (e.type === 'act') p.setAttribute('marker-end', e.reveal ? 'url(#arRev)' : 'url(#arAct)');
+  t.textContent = e.label; const ti = document.createElementNS(NS, 'title');
+  ti.textContent = `${e.label} — гл. ${RN[e.ch]}, стр. ${e.pg}` + (e.quote ? `\n«${e.quote}»` : ''); g.appendChild(ti);
+  g.append(p, r, t); SV.appendChild(g); e.g = g; e.p = p; e.r = r; e.t = t;
+});
+function clip(cx, cy, w, h, tx, ty) { const dx = tx - cx, dy = ty - cy; const s = Math.min((w / 2 + 6) / Math.abs(dx || 1e-6), (h / 2 + 6) / Math.abs(dy || 1e-6)); return [cx + dx * s, cy + dy * s]; }
+function route() {
+  DATA.edges.forEach(e => {
+    const a = byId[e.from], b = byId[e.to];
+    const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2, dx = b.x - a.x, dy = b.y - a.y, L = Math.hypot(dx, dy) || 1;
+    const bend = e.off + (pairCount[[e.from, e.to].sort().join('|')] === 1 ? Math.min(40, L * .06) : 0);
+    const cx = mx - dy / L * bend, cy = my + dx / L * bend;
+    const [sx, sy] = clip(a.x, a.y, a.w, a.h, cx, cy), [ex, ey] = clip(b.x, b.y, b.w, b.h, cx, cy);
+    e.p.setAttribute('d', `M${sx},${sy} Q${cx},${cy} ${ex},${ey}`);
+    const lx = .25 * sx + .5 * cx + .25 * ex, ly = .25 * sy + .5 * cy + .25 * ey;
+    e.t.setAttribute('x', lx); e.t.setAttribute('y', ly + 4); e.t.setAttribute('text-anchor', 'middle');
+    const bb = e.t.getBBox(); Object.entries({x: bb.x - 4, y: bb.y - 2, width: bb.width + 8, height: bb.height + 4}).forEach(([k, v]) => e.r.setAttribute(k, v));
+  });
+}
+// visibility
+function visNode(n) { return n.ch <= S.ch && (!n.reveal || S.reveal); }
+function visEdge(e) { return e.ch <= S.ch && (!e.reveal || S.reveal) && visNode(byId[e.from]) && visNode(byId[e.to]); }
+function render() {
+  DATA.nodes.forEach(n => {
+    n.el.classList.toggle('hidden', !visNode(n));
+    const rr = S.reveal && n.revealRole ? n.revealRole : n.role; n.el.querySelector('.rl').textContent = rr || '';
+    n.el.classList.toggle('killer', S.reveal && n.id === 'franklin');
+    n.el.classList.toggle('framed', S.reveal && n.id === 'cust');
+  });
+  DATA.edges.forEach(e => e.g.classList.toggle('hidden', !visEdge(e)));
+  document.getElementById('chLabel').textContent = (DATA.titles[S.ch] || 'Глава ' + RN[S.ch]);
+  document.getElementById('chSlider').value = S.ch;
+  const rb = document.getElementById('revealBtn'); rb.classList.toggle('on', S.reveal); rb.textContent = S.reveal ? '🔒 Скрыть разгадку' : '🔓 Показать разгадку';
+  document.querySelectorAll('#timeline button').forEach(b => b.classList.toggle('cur', +b.dataset.ch === S.ch));
+  highlight(); if (S.sel) panel(S.sel);
+}
+function highlight() {
+  const sel = S.sel && visNode(byId[S.sel]) ? S.sel : null; const nb = new Set([sel]);
+  DATA.edges.forEach(e => { const on = !sel || e.from === sel || e.to === sel; e.g.classList.toggle('dim', !on); if (sel && on && visEdge(e)) { nb.add(e.from); nb.add(e.to); } });
+  DATA.nodes.forEach(n => { n.el.classList.toggle('dim', !!sel && !nb.has(n.id)); n.el.classList.toggle('sel', n.id === sel); });
+}
+function panel(id) {
+  const n = byId[id]; const P = document.getElementById('panel');
+  const cx = DATA.edges.filter(e => visEdge(e) && (e.from === id || e.to === id)).sort((a, b) => a.ch - b.ch).map(e => {
+    const other = byId[e.from === id ? e.to : e.from]; const dir = e.from === id ? `${e.label} → <a data-id="${other.id}">${other.name}</a>` : `<a data-id="${other.id}">${other.name}</a> → ${e.label}`;
+    return `<div class="cx ${e.type}${e.reveal ? ' reveal' : ''}">${dir} <span class="pg">гл. ${RN[e.ch]}, стр. ${e.pg}</span>${e.quote ? `<br><q>${e.quote}</q>` : ''}</div>`;
+  }).join('');
+  const rr = S.reveal && n.revealRole ? n.revealRole : n.role;
+  P.innerHTML = `<h3>${n.icon === 'mustache' ? '' : n.icon + ' '}${n.name}</h3><p class="rl">${rr || ''} · появляется в гл. ${RN[n.ch]}</p>` +
+    `<h4>Что о нём известно</h4><ul>${n.facts.map(f => `<li>${f}</li>`).join('')}</ul><h4>Связи (к гл. ${RN[S.ch]})</h4>${cx || '<p>пока нет</p>'}`;
+  P.querySelectorAll('a[data-id]').forEach(a => a.onclick = () => select(a.dataset.id));
+}
+function select(id) { S.sel = id; highlight(); panel(id); }
+VP.addEventListener('click', () => { if (moved) return; S.sel = null; highlight(); });
+// controls
+document.getElementById('chSlider').oninput = ev => { S.ch = +ev.target.value; if (S.ch < 34) S.reveal = false; render(); };
+document.getElementById('revealBtn').onclick = () => { S.reveal = !S.reveal; if (S.reveal) S.ch = 34; render(); };
+document.getElementById('fitBtn').onclick = fit;
+const TL = [[1, 'Письмо Пуаро', 'гл. I'], [3, 'A — Андовер', '21 июня'], [9, 'B — Бэксхилл', '25 июля'], [14, 'C — Керстон', '30 июля'],
+  [18, 'Спецкоманда', 'гл. XVIII'], [24, 'D — Донкастер', '11 сентября'], [30, 'Каст в полиции', 'гл. XXX'], [33, 'Суд и тюрьма', 'ноябрь']];
+TL.forEach(([ch, t, d]) => { const b = document.createElement('button'); b.dataset.ch = ch; b.innerHTML = `<b>${d}</b>${t}`; b.onclick = () => { S.ch = ch; S.reveal = false; render(); }; document.getElementById('timeline').appendChild(b); });
+// pan & zoom
+function apply() { W.style.transform = `translate(${S.x}px,${S.y}px) scale(${S.k})`; }
+function fit() { const r = VP.getBoundingClientRect(); S.k = Math.min(r.width / 2600, r.height / 1700) * .98; S.x = (r.width - 2600 * S.k) / 2; S.y = (r.height - 1700 * S.k) / 2; apply(); }
+VP.addEventListener('wheel', ev => { ev.preventDefault(); const r = VP.getBoundingClientRect(); const mx = ev.clientX - r.left, my = ev.clientY - r.top;
+  const nk = Math.max(.25, Math.min(2.5, S.k * (ev.deltaY < 0 ? 1.12 : 1 / 1.12))); S.x = mx - (mx - S.x) * nk / S.k; S.y = my - (my - S.y) * nk / S.k; S.k = nk; apply(); }, {passive: false});
+let drag = null, moved = false;
+VP.addEventListener('mousedown', ev => { drag = [ev.clientX, ev.clientY, S.x, S.y]; moved = false; });
+window.addEventListener('mousemove', ev => { if (!drag) return; const dx = ev.clientX - drag[0], dy = ev.clientY - drag[1]; if (Math.abs(dx) + Math.abs(dy) > 4) { moved = true; VP.classList.add('drag'); } S.x = drag[2] + dx; S.y = drag[3] + dy; apply(); });
+window.addEventListener('mouseup', () => { drag = null; VP.classList.remove('drag'); setTimeout(() => moved = false, 0); });
+window.addEventListener('resize', fit);
+place(); route(); render(); fit();
+</script></body></html>

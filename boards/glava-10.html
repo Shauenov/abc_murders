@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Глава X «Барнарды» — доска улик · Убийства по алфавиту</title><style>:root{
+  --cork:#c9a26b; --cork-dark:#a9824e; --paper:#fffaf0; --ink:#2b2118;
+  --muted:#6b5a48; --red:#b3261e; --pin:#d33; --yellow:#fff3b0;
+  --person:#f6e7c8; --thing:#e6eef6; --place:#e3f0e1; --time:#f9e1e1;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);
+  background:
+    radial-gradient(circle at 20% 30%,rgba(0,0,0,.06) 1px,transparent 2px) 0 0/14px 14px,
+    radial-gradient(circle at 70% 60%,rgba(255,255,255,.08) 1px,transparent 2px) 0 0/11px 11px,
+    var(--cork);}
+.board{max-width:1400px;margin:0 auto;padding:28px 28px 40px}
+header{background:var(--paper);padding:16px 24px;border-radius:4px;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);position:relative;margin-bottom:26px;transform:rotate(-.4deg)}
+header h1{margin:0;font-size:30px;letter-spacing:.5px}
+header p{margin:6px 0 0;color:var(--muted);font-size:15px}
+header .narr{display:inline-block;margin-top:8px;background:var(--time);padding:3px 10px;border-radius:12px;font-size:13.5px;color:var(--ink)}
+nav.chap{display:flex;justify-content:space-between;gap:10px;margin:0 0 18px;font-size:14px}
+nav.chap a{background:var(--paper);color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:3px;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.pin{position:absolute;top:-9px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ff8a80,var(--pin) 55%,#7a1010);box-shadow:0 2px 3px rgba(0,0,0,.4)}
+h2.section{display:inline-block;background:var(--ink);color:#fff;font-size:15px;letter-spacing:2px;
+  text-transform:uppercase;padding:6px 14px;margin:8px 0 14px;border-radius:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-bottom:26px}
+.card{background:var(--paper);border-radius:3px;padding:16px 16px 12px;position:relative;
+  box-shadow:0 5px 12px rgba(0,0,0,.28)}
+.card:nth-child(3n+1){transform:rotate(-.8deg)} .card:nth-child(3n+2){transform:rotate(.6deg)}
+.card .tag{position:absolute;top:10px;right:12px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:2px 8px;border-radius:10px;color:var(--muted)}
+.person .tag{background:var(--person)} .thing .tag{background:var(--thing)}
+.place .tag{background:var(--place)}
+.portrait{width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:52px;margin:4px 0 8px;border:3px solid #fff;box-shadow:0 0 0 2px var(--cork-dark)}
+.person .portrait{background:var(--person)} .thing .portrait{background:var(--thing)}
+.place .portrait{background:var(--place)}
+.card h3{margin:0 0 2px;font-size:21px}
+.card .role{color:var(--muted);font-style:italic;margin:0 0 10px;font-size:14px}
+.card ul{margin:0;padding-left:18px} .card li{margin:5px 0;font-size:14.5px;line-height:1.35}
+q{font-style:italic;quotes:"«" "»"} .pg{color:var(--muted);font-size:11.5px;white-space:nowrap}
+.key{background:var(--yellow);padding:0 3px}
+.letter{font-family:"Courier New",Courier,monospace;background:#fff;border:1px solid #ddd;
+  padding:12px 14px;font-size:13.5px;line-height:1.45;margin:8px 0}
+.letter .sig{text-align:right;font-weight:bold;letter-spacing:2px}
+.links{background:var(--paper);border-radius:3px;padding:16px 18px;box-shadow:0 5px 12px rgba(0,0,0,.28);margin-bottom:26px;position:relative}
+.link{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:9px 0;font-size:15px}
+.chip{padding:4px 10px;border-radius:14px;font-weight:bold;border:1px solid rgba(0,0,0,.12)}
+.chip.person{background:var(--person)} .chip.thing{background:var(--thing)} .chip.place{background:var(--place)}
+.arrow{color:var(--red);font-weight:bold}
+.arrow::after{content:" ⟶"}
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;
+  background:var(--paper);border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;margin-bottom:26px}
+.step{padding:16px 16px 14px;border-right:2px dashed var(--cork-dark);position:relative}
+.step:last-child{border-right:none}
+.step .when{display:inline-block;background:var(--red);color:#fff;font-weight:bold;font-size:13px;padding:3px 9px;border-radius:2px}
+.step p{margin:8px 0 0;font-size:14.5px;line-height:1.35}
+.remember{background:var(--yellow);padding:16px 22px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;transform:rotate(.3deg)}
+.remember h2{margin:0 0 8px;font-size:20px}
+.remember ol{margin:0;padding-left:22px;columns:2;column-gap:36px} .remember li{margin:5px 0;font-size:15px;break-inside:avoid}
+footer{margin-top:20px;color:#3d2c1a;font-size:12.5px;text-align:center}
+.bigboard{display:block;position:relative;background:var(--yellow);color:var(--ink);text-decoration:none;padding:18px 22px;margin:0 0 24px;
+  border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);font-size:22px;transform:rotate(-.3deg)}
+.bigboard small{display:block;font-size:14.5px;color:var(--muted);margin-top:4px}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.toc a{display:block;background:var(--paper);color:var(--ink);text-decoration:none;padding:12px 14px;border-radius:3px;box-shadow:0 4px 9px rgba(0,0,0,.25)}
+.toc a b{display:block;font-size:13px;color:var(--muted);letter-spacing:1px}
+@media (max-width:700px){.remember ol{columns:1}}
+@media print{
+  @page{size:A3 landscape;margin:10mm}
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card,header,.remember{transform:none!important}
+  .card,.links,.timeline,.remember{box-shadow:0 0 0 1px #bbb}
+  nav.chap{display:none}
+}
+</style></head><body><div class="board"><nav class="chap"><a href="glava-09.html">← Глава 9</a><a href="index.html">Все главы</a><a href="glava-11.html">Глава 11 →</a></nav><header><span class="pin"></span><h1>🔎 Глава X. «Барнарды»</h1><p>Агата Кристи, «Убийства по алфавиту». Все детали и цитаты взяты из текста книги; <span class="pg">стр.</span> — номер страницы в PDF.</p><span class="narr">Рассказывает капитан Гастингс</span></header><h2 class="section">Кто</h2><div class="grid"><div class="card person"><span class="pin"></span><span class="tag">отец жертвы</span><div class="portrait">🔩</div><h3>Мистер Барнард</h3><p class="role"><b>коренастый</b>, около <b>55 лет</b>, озадаченный вид <span class="pg">стр. 64</span></p><ul><li>Торговал <b>скобяными товарами в Кеннингтоне</b>; ушёл на покой <b>2 года назад</b> <span class="pg">стр. 65</span></li><li>Всегда хотели жить <b>у моря</b> <span class="pg">стр. 65</span></li><li>Зовёт жену <q>мать</q>, <q>старушка</q> <span class="pg">стр. 64</span> <span class="pg">стр. 66</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">мать жертвы</span><div class="portrait">😢</div><h3>Миссис Барнард</h3><p class="role">заплаканная, в шоке <span class="pg">стр. 64</span></p><ul><li>Лёгкий <b>напевный акцент</b> — она <b>валлийка</b> <span class="pg">стр. 65</span></li><li>Родители ложатся рано, <b>в 9 вечера</b> — не знали, что Бетти не вернулась <span class="pg">стр. 65</span></li><li>Ей нравится жених Бетти: <q>Дональд никогда, никогда…</q> <span class="pg">стр. 66</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">сестра жертвы</span><div class="portrait">🎎</div><h3>Меган Барнард</h3><p class="role">старшая дочь, работает <b>в Сити, в Лондоне</b> <span class="pg">стр. 65</span> <span class="pg">стр. 67</span></p><ul><li>Приехала на <b>такси</b> с чемоданчиком, в <b>белой вязаной шапочке</b> <span class="pg">стр. 66–67</span></li><li>Похожа на <b>голландскую куклу</b>: тёмные волосы, <b>прямая чёлка</b>, высокие скулы <span class="pg">стр. 67</span></li><li>Не красавица, но в ней <q>какая-то глубина и сила</q> <span class="pg">стр. 67</span></li><li><b>Курит</b>; называет Пуаро <q>модная частная ищейка</q> <span class="pg">стр. 68</span></li><li>Шокирует: <q>Бетти была законченной маленькой идиоткой!</q> <span class="pg">стр. 69</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">жених жертвы</span><div class="portrait">💍</div><h3>Дональд Фрэйзер</h3><p class="role">работает в <b>«Корт энд Брунскил»</b> (недвижимость) <span class="pg">стр. 66</span></p><ul><li>Встречал Бетти после работы <b>раз или два в неделю</b> <span class="pg">стр. 66</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">сыщик</span><div class="portrait"><svg viewBox="0 0 100 50" width="70" height="35" aria-label="усы"><path d="M50 22c-6-10-20-12-30-6-6 4-10 2-14-3 0 10 8 18 20 17 10 0 18-4 24-8zM50 22c6-10 20-12 30-6 6 4 10 2 14-3 0 10-8 18-20 17-10 0-18-4-24-8z" fill="#2b2118"/></svg></div><h3>Эркюль Пуаро</h3><p class="role">хочет услышать правду о жертве</p><ul><li><q>Мертвых всегда превозносят</q> — ищет того, кто знал Бетти, но ещё не знает о её смерти <span class="pg">стр. 68</span></li></ul></div></div><h2 class="section">Улики и предметы</h2><div class="grid"><div class="card thing"><span class="pin"></span><span class="tag">деталь</span><div class="portrait">🔑</div><h3>Ключ под ковриком</h3><p class="role">для Бетти всегда оставляли ключ <b>под ковриком</b> <span class="pg">стр. 65</span></p><ul><li>Обычно Бетти возвращалась <b>к 11 часам</b> <span class="pg">стр. 65</span></li></ul></div></div><h2 class="section">Где</h2><div class="grid"><div class="card place"><span class="pin"></span><span class="tag">дом жертвы</span><div class="portrait">🏡</div><h3>Бунгало «Лландидно»</h3><p class="role">одно из <b>пятидесяти</b> на окраине Бэксхилла <span class="pg">стр. 64</span></p><ul><li>Названо в честь курорта в <b>Уэльсе</b> <span class="pg">сноска 36</span></li><li>Меган ведёт Гастингса и Пуаро на <b>маленькую кухню</b> <span class="pg">стр. 68</span></li></ul></div></div><h2 class="section">Кто что сделал</h2><div class="links"><span class="pin"></span><div class="link"><span class="chip person">Кроум и Келси</span><span class="arrow">допрашивают</span><span class="chip person">мистера и миссис Барнард</span><span><span class="pg">стр. 64–66</span></span></div><div class="link"><span class="chip person">Бетти</span><span class="arrow">встречалась с</span><span class="chip person">Дональдом Фрэйзером</span><span><span class="pg">стр. 66</span></span></div><div class="link"><span class="chip person">Меган</span><span class="arrow">приезжает из Лондона в</span><span class="chip place">«Лландидно»</span><span><span class="pg">стр. 66–67</span></span></div><div class="link"><span class="chip person">Меган</span><span class="arrow">говорит Пуаро</span><span>«Бетти была законченной маленькой идиоткой!» <span class="pg">стр. 69</span></span></div></div><h2 class="section">Когда</h2><div class="timeline"><span class="pin"></span><div class="step"><span class="when">Приезд</span><p>Келси представляет Кроума, Пуаро и Гастингса Барнардам. <span class="pg">стр. 64</span></p></div><div class="step"><span class="when">Допрос</span><p>Родители: Бетти 23 года, жених — Дональд Фрэйзер. <span class="pg">стр. 65–66</span></p></div><div class="step"><span class="when">Комната Бетти</span><p>Кроум идёт искать письма или дневник. <span class="pg">стр. 66</span></p></div><div class="step"><span class="when">Меган</span><p>Сестра приезжает на такси; разговор на кухне с Пуаро. <span class="pg">стр. 66–69</span></p></div></div><div class="remember"><span class="pin"></span><h2>📌 Запомни к викторине</h2><ol><li>Дом Барнардов — бунгало <b>«Лландидно»</b>.</li><li>Мистер Барнард торговал <b>скобяными товарами</b> в Кеннингтоне.</li><li>Миссис Барнард — <b>валлийка</b>.</li><li>Ключ для Бетти оставляли <b>под ковриком</b>.</li><li>Жених Бетти — <b>Дональд Фрэйзер</b>.</li><li>Сестра — <b>Меган Барнард</b>, работает в <b>Лондоне</b>.</li><li>Меган похожа на <b>голландскую куклу</b>, носит <b>прямую чёлку</b>.</li><li>Меган: «Бетти была <b>законченной маленькой идиоткой</b>!»</li></ol></div><footer>Источник: А. Кристи, «Убийства по алфавиту», пер. А. С. Петухова (Эксмо, 2015). Страницы указаны по PDF.</footer></div></body></html>

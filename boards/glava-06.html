@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Глава VI «Место преступления» — доска улик · Убийства по алфавиту</title><style>:root{
+  --cork:#c9a26b; --cork-dark:#a9824e; --paper:#fffaf0; --ink:#2b2118;
+  --muted:#6b5a48; --red:#b3261e; --pin:#d33; --yellow:#fff3b0;
+  --person:#f6e7c8; --thing:#e6eef6; --place:#e3f0e1; --time:#f9e1e1;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);
+  background:
+    radial-gradient(circle at 20% 30%,rgba(0,0,0,.06) 1px,transparent 2px) 0 0/14px 14px,
+    radial-gradient(circle at 70% 60%,rgba(255,255,255,.08) 1px,transparent 2px) 0 0/11px 11px,
+    var(--cork);}
+.board{max-width:1400px;margin:0 auto;padding:28px 28px 40px}
+header{background:var(--paper);padding:16px 24px;border-radius:4px;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);position:relative;margin-bottom:26px;transform:rotate(-.4deg)}
+header h1{margin:0;font-size:30px;letter-spacing:.5px}
+header p{margin:6px 0 0;color:var(--muted);font-size:15px}
+header .narr{display:inline-block;margin-top:8px;background:var(--time);padding:3px 10px;border-radius:12px;font-size:13.5px;color:var(--ink)}
+nav.chap{display:flex;justify-content:space-between;gap:10px;margin:0 0 18px;font-size:14px}
+nav.chap a{background:var(--paper);color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:3px;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.pin{position:absolute;top:-9px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ff8a80,var(--pin) 55%,#7a1010);box-shadow:0 2px 3px rgba(0,0,0,.4)}
+h2.section{display:inline-block;background:var(--ink);color:#fff;font-size:15px;letter-spacing:2px;
+  text-transform:uppercase;padding:6px 14px;margin:8px 0 14px;border-radius:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-bottom:26px}
+.card{background:var(--paper);border-radius:3px;padding:16px 16px 12px;position:relative;
+  box-shadow:0 5px 12px rgba(0,0,0,.28)}
+.card:nth-child(3n+1){transform:rotate(-.8deg)} .card:nth-child(3n+2){transform:rotate(.6deg)}
+.card .tag{position:absolute;top:10px;right:12px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:2px 8px;border-radius:10px;color:var(--muted)}
+.person .tag{background:var(--person)} .thing .tag{background:var(--thing)}
+.place .tag{background:var(--place)}
+.portrait{width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:52px;margin:4px 0 8px;border:3px solid #fff;box-shadow:0 0 0 2px var(--cork-dark)}
+.person .portrait{background:var(--person)} .thing .portrait{background:var(--thing)}
+.place .portrait{background:var(--place)}
+.card h3{margin:0 0 2px;font-size:21px}
+.card .role{color:var(--muted);font-style:italic;margin:0 0 10px;font-size:14px}
+.card ul{margin:0;padding-left:18px} .card li{margin:5px 0;font-size:14.5px;line-height:1.35}
+q{font-style:italic;quotes:"«" "»"} .pg{color:var(--muted);font-size:11.5px;white-space:nowrap}
+.key{background:var(--yellow);padding:0 3px}
+.letter{font-family:"Courier New",Courier,monospace;background:#fff;border:1px solid #ddd;
+  padding:12px 14px;font-size:13.5px;line-height:1.45;margin:8px 0}
+.letter .sig{text-align:right;font-weight:bold;letter-spacing:2px}
+.links{background:var(--paper);border-radius:3px;padding:16px 18px;box-shadow:0 5px 12px rgba(0,0,0,.28);margin-bottom:26px;position:relative}
+.link{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:9px 0;font-size:15px}
+.chip{padding:4px 10px;border-radius:14px;font-weight:bold;border:1px solid rgba(0,0,0,.12)}
+.chip.person{background:var(--person)} .chip.thing{background:var(--thing)} .chip.place{background:var(--place)}
+.arrow{color:var(--red);font-weight:bold}
+.arrow::after{content:" ⟶"}
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;
+  background:var(--paper);border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;margin-bottom:26px}
+.step{padding:16px 16px 14px;border-right:2px dashed var(--cork-dark);position:relative}
+.step:last-child{border-right:none}
+.step .when{display:inline-block;background:var(--red);color:#fff;font-weight:bold;font-size:13px;padding:3px 9px;border-radius:2px}
+.step p{margin:8px 0 0;font-size:14.5px;line-height:1.35}
+.remember{background:var(--yellow);padding:16px 22px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;transform:rotate(.3deg)}
+.remember h2{margin:0 0 8px;font-size:20px}
+.remember ol{margin:0;padding-left:22px;columns:2;column-gap:36px} .remember li{margin:5px 0;font-size:15px;break-inside:avoid}
+footer{margin-top:20px;color:#3d2c1a;font-size:12.5px;text-align:center}
+.bigboard{display:block;position:relative;background:var(--yellow);color:var(--ink);text-decoration:none;padding:18px 22px;margin:0 0 24px;
+  border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);font-size:22px;transform:rotate(-.3deg)}
+.bigboard small{display:block;font-size:14.5px;color:var(--muted);margin-top:4px}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.toc a{display:block;background:var(--paper);color:var(--ink);text-decoration:none;padding:12px 14px;border-radius:3px;box-shadow:0 4px 9px rgba(0,0,0,.25)}
+.toc a b{display:block;font-size:13px;color:var(--muted);letter-spacing:1px}
+@media (max-width:700px){.remember ol{columns:1}}
+@media print{
+  @page{size:A3 landscape;margin:10mm}
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card,header,.remember{transform:none!important}
+  .card,.links,.timeline,.remember{box-shadow:0 0 0 1px #bbb}
+  nav.chap{display:none}
+}
+</style></head><body><div class="board"><nav class="chap"><a href="glava-05.html">← Глава 5</a><a href="index.html">Все главы</a><a href="glava-07.html">Глава 7 →</a></nav><header><span class="pin"></span><h1>🔎 Глава VI. «Место преступления»</h1><p>Агата Кристи, «Убийства по алфавиту». Все детали и цитаты взяты из текста книги; <span class="pg">стр.</span> — номер страницы в PDF.</p><span class="narr">Рассказывает капитан Гастингс</span></header><h2 class="section">Кто</h2><div class="grid"><div class="card person"><span class="pin"></span><span class="tag">сыщик</span><div class="portrait"><svg viewBox="0 0 100 50" width="70" height="35" aria-label="усы"><path d="M50 22c-6-10-20-12-30-6-6 4-10 2-14-3 0 10 8 18 20 17 10 0 18-4 24-8zM50 22c6-10 20-12 30-6 6 4 10 2 14-3 0 10-8 18-20 17-10 0-18-4-24-8z" fill="#2b2118"/></svg></div><h3>Эркюль Пуаро</h3><p class="role">хитрит, чтобы разговорить свидетелей</p><ul><li>Приходит на место в <b>половине шестого</b> — в то же время, что и убийство <span class="pg">стр. 34</span></li><li>В зеленной лавке выдумывает «высокого светловолосого русского» — чтобы люди начали спорить <span class="pg">стр. 38</span></li><li>Миссис Фаулер представляется сотрудником газеты <b>«Вечерний дятел»</b> (выдумана) и обещает <b>5 фунтов</b> <span class="pg">стр. 40</span> <span class="pg">сноска 26</span></li><li>Англичане на прямой вопрос <q>закрылись бы, как устричные раковины</q> <span class="pg">стр. 39</span></li><li>Ругает Гастингса за <b>клубнику</b>: потекла и грозит его костюму <span class="pg">стр. 39</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">рассказчик</span><div class="portrait">📝</div><h3>Капитан Гастингс</h3><p class="role">подыгрывает Пуаро</p><ul><li>Возражает: убийца, мол, был <b>темноволосый и невысокий</b> (тоже выдумка) <span class="pg">стр. 38</span></li><li>Купил <b>фунт клубники</b> и отдал её мальчишке <span class="pg">стр. 37</span> <span class="pg">стр. 39</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">соседка</span><div class="portrait">🗣️</div><h3>Миссис Фаулер</h3><p class="role">живёт в соседнем доме <span class="pg">стр. 40</span></p><ul><li>Женщина с <b>острыми чертами лица</b> <span class="pg">стр. 40</span></li><li>Дома мебель в <b>псевдоякобинском</b> стиле, закопчённые муслиновые шторы <span class="pg">стр. 39–40</span></li><li>Предупреждала миссис Ашер: <q>Рано или поздно этот человек тебя достанет</q> <span class="pg">стр. 41</span></li><li>Ничего не слышала; писем A. B. C. и справочника <b>не видела</b> <span class="pg">стр. 41</span></li><li>Её дочка — <b>малышка Эди</b> <span class="pg">стр. 41</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">свидетели</span><div class="portrait">🥬</div><h3>Хозяева зеленной лавки</h3><p class="role">напротив магазина Ашер <span class="pg">стр. 37</span></p><ul><li><b>Коренастая женщина</b>, её высокий худой муж и мальчишка-посыльный с <b>хриплым голосом</b> <span class="pg">стр. 37–38</span></li><li>Вечером у них много покупателей — <b>никого особенного не заметили</b> <span class="pg">стр. 38</span></li></ul></div></div><h2 class="section">Улики и предметы</h2><div class="grid"><div class="card thing"><span class="pin"></span><span class="tag">улика</span><div class="portrait">📖</div><h3>Справочник A. B. C.</h3><p class="role">на прилавке <span class="pg">стр. 35</span></p><ul><li>Был <b>открыт на странице Андовера</b> — как будто смотрели поезда из Андовера в Лондон <span class="pg">стр. 35</span></li></ul></div><div class="card thing"><span class="pin"></span><span class="tag">улика</span><div class="portrait">🚬</div><h3>Пачка «Плейера»</h3><p class="role">лежала рядом с телом <span class="pg">стр. 35</span> <span class="pg">сноска 23</span></p></div><div class="card thing"><span class="pin"></span><span class="tag">улика</span><div class="portrait">🖐️</div><h3>Отпечатки пальцев</h3><p class="role"><span class="pg">стр. 35–36</span></p><ul><li>На прилавке их <b>слишком много</b>, все запутаны <span class="pg">стр. 36</span></li></ul></div><div class="card thing"><span class="pin"></span><span class="tag">в доме жертвы</span><div class="portrait">🖼️</div><h3>Три фотографии на камине</h3><p class="role"><span class="pg">стр. 36–37</span></p><ul><li><b>Мэри Дроуэр</b> в лучшей одежде, с деревянной улыбкой <span class="pg">стр. 36</span></li><li>Седая женщина в <b>меховом воротнике</b> — Гастингс думает, это мисс Роуз <span class="pg">стр. 36</span></li><li>Старое <b>свадебное фото</b>: красивая невеста и Ашер с <b>военной выправкой</b> <span class="pg">стр. 36–37</span></li></ul></div><div class="card thing"><span class="pin"></span><span class="tag">в спальне жертвы</span><div class="portrait">📚</div><h3>Вещи миссис Ашер</h3><p class="role"><span class="pg">стр. 37</span></p><ul><li>Роман <b>«Зелёный оазис»</b>, пара <b>новых чулок</b> <span class="pg">стр. 37</span></li><li>Фарфор: побитая <b>овчарка</b> и <b>сине-жёлтая пятнистая собака</b> <span class="pg">стр. 37</span></li><li><b>Чёрный плащ</b> и вытянутый шерстяной свитер <span class="pg">стр. 37</span></li></ul></div></div><h2 class="section">Где</h2><div class="grid"><div class="card place"><span class="pin"></span><span class="tag">место преступления</span><div class="portrait">🚬</div><h3>Магазин «А. Ашер»</h3><p class="role">в переулке, посередине <b>по правой стороне</b> <span class="pg">стр. 34</span></p><ul><li>Перед магазином <b>толпа зевак</b> <span class="pg">стр. 34</span></li><li>Ставни закрыты, тусклая лампочка, пыльные журналы, банки с <b>ментоловыми помадками</b> <span class="pg">стр. 35</span></li><li>Справа — пустой дом с надписью <b>«Сдаётся»</b>; <b>задней двери нет</b> <span class="pg">стр. 39</span> <span class="pg">стр. 42</span></li></ul></div></div><h2 class="section">Кто что сделал</h2><div class="links"><span class="pin"></span><div class="link"><span class="chip person">Пуаро</span><span class="arrow">осматривает</span><span class="chip place">магазин «А. Ашер»</span><span><span class="pg">стр. 35</span></span></div><div class="link"><span class="chip person">Пуаро и Гастингс</span><span class="arrow">разыгрывают спор в</span><span class="chip place">зеленной лавке</span><span><span class="pg">стр. 38</span></span></div><div class="link"><span class="chip person">Пуаро</span><span class="arrow">«от газеты» платит 5 фунтов</span><span class="chip person">миссис Фаулер</span><span><span class="pg">стр. 40–42</span></span></div><div class="link"><span class="chip person">Пуаро</span><span class="arrow">встречает</span><span class="chip person">инспектора Глена</span><span><span class="pg">стр. 42</span></span></div></div><h2 class="section">Когда</h2><div class="timeline"><span class="pin"></span><div class="step"><span class="when">17:30</span><p>Пуаро приходит в переулок в час убийства. <span class="pg">стр. 34</span></p></div><div class="step"><span class="when">Магазин</span><p>Осмотр лавки, кухни и спальни жертвы. <span class="pg">стр. 35–37</span></p></div><div class="step"><span class="when">Зеленная лавка</span><p>Спектакль про «русского» и клубнику. <span class="pg">стр. 37–39</span></p></div><div class="step"><span class="when">Миссис Фаулер</span><p>«Интервью» за 5 фунтов. Потом — встреча с Гленом. <span class="pg">стр. 40–42</span></p></div></div><div class="remember"><span class="pin"></span><h2>📌 Запомни к викторине</h2><ol><li>Магазин — в переулке, на вывеске <b>«А. Ашер»</b>.</li><li>Рядом с телом — пачка сигарет <b>«Плейер»</b>.</li><li>Справочник был открыт на <b>странице Андовера</b>.</li><li>На камине — <b>три фото</b>, в т. ч. свадебное.</li><li>В спальне — роман <b>«Зелёный оазис»</b>.</li><li>Гастингс купил <b>клубнику</b>, Пуаро — <b>салат</b>.</li><li>Соседка — <b>миссис Фаулер</b>, дочка <b>Эди</b>.</li><li>Пуаро притворяется журналистом <b>«Вечернего дятла»</b>, платит <b>5 фунтов</b>.</li><li>Вывод Пуаро: вечером улица <b>занята</b> — убийца удачно выбрал время.</li></ol></div><footer>Источник: А. Кристи, «Убийства по алфавиту», пер. А. С. Петухова (Эксмо, 2015). Страницы указаны по PDF.</footer></div></body></html>

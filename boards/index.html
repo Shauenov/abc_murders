@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Убийства по алфавиту — доски улик</title><style>:root{
+  --cork:#c9a26b; --cork-dark:#a9824e; --paper:#fffaf0; --ink:#2b2118;
+  --muted:#6b5a48; --red:#b3261e; --pin:#d33; --yellow:#fff3b0;
+  --person:#f6e7c8; --thing:#e6eef6; --place:#e3f0e1; --time:#f9e1e1;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);
+  background:
+    radial-gradient(circle at 20% 30%,rgba(0,0,0,.06) 1px,transparent 2px) 0 0/14px 14px,
+    radial-gradient(circle at 70% 60%,rgba(255,255,255,.08) 1px,transparent 2px) 0 0/11px 11px,
+    var(--cork);}
+.board{max-width:1400px;margin:0 auto;padding:28px 28px 40px}
+header{background:var(--paper);padding:16px 24px;border-radius:4px;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);position:relative;margin-bottom:26px;transform:rotate(-.4deg)}
+header h1{margin:0;font-size:30px;letter-spacing:.5px}
+header p{margin:6px 0 0;color:var(--muted);font-size:15px}
+header .narr{display:inline-block;margin-top:8px;background:var(--time);padding:3px 10px;border-radius:12px;font-size:13.5px;color:var(--ink)}
+nav.chap{display:flex;justify-content:space-between;gap:10px;margin:0 0 18px;font-size:14px}
+nav.chap a{background:var(--paper);color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:3px;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.pin{position:absolute;top:-9px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ff8a80,var(--pin) 55%,#7a1010);box-shadow:0 2px 3px rgba(0,0,0,.4)}
+h2.section{display:inline-block;background:var(--ink);color:#fff;font-size:15px;letter-spacing:2px;
+  text-transform:uppercase;padding:6px 14px;margin:8px 0 14px;border-radius:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-bottom:26px}
+.card{background:var(--paper);border-radius:3px;padding:16px 16px 12px;position:relative;
+  box-shadow:0 5px 12px rgba(0,0,0,.28)}
+.card:nth-child(3n+1){transform:rotate(-.8deg)} .card:nth-child(3n+2){transform:rotate(.6deg)}
+.card .tag{position:absolute;top:10px;right:12px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:2px 8px;border-radius:10px;color:var(--muted)}
+.person .tag{background:var(--person)} .thing .tag{background:var(--thing)}
+.place .tag{background:var(--place)}
+.portrait{width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:52px;margin:4px 0 8px;border:3px solid #fff;box-shadow:0 0 0 2px var(--cork-dark)}
+.person .portrait{background:var(--person)} .thing .portrait{background:var(--thing)}
+.place .portrait{background:var(--place)}
+.card h3{margin:0 0 2px;font-size:21px}
+.card .role{color:var(--muted);font-style:italic;margin:0 0 10px;font-size:14px}
+.card ul{margin:0;padding-left:18px} .card li{margin:5px 0;font-size:14.5px;line-height:1.35}
+q{font-style:italic;quotes:"«" "»"} .pg{color:var(--muted);font-size:11.5px;white-space:nowrap}
+.key{background:var(--yellow);padding:0 3px}
+.letter{font-family:"Courier New",Courier,monospace;background:#fff;border:1px solid #ddd;
+  padding:12px 14px;font-size:13.5px;line-height:1.45;margin:8px 0}
+.letter .sig{text-align:right;font-weight:bold;letter-spacing:2px}
+.links{background:var(--paper);border-radius:3px;padding:16px 18px;box-shadow:0 5px 12px rgba(0,0,0,.28);margin-bottom:26px;position:relative}
+.link{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:9px 0;font-size:15px}
+.chip{padding:4px 10px;border-radius:14px;font-weight:bold;border:1px solid rgba(0,0,0,.12)}
+.chip.person{background:var(--person)} .chip.thing{background:var(--thing)} .chip.place{background:var(--place)}
+.arrow{color:var(--red);font-weight:bold}
+.arrow::after{content:" ⟶"}
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;
+  background:var(--paper);border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;margin-bottom:26px}
+.step{padding:16px 16px 14px;border-right:2px dashed var(--cork-dark);position:relative}
+.step:last-child{border-right:none}
+.step .when{display:inline-block;background:var(--red);color:#fff;font-weight:bold;font-size:13px;padding:3px 9px;border-radius:2px}
+.step p{margin:8px 0 0;font-size:14.5px;line-height:1.35}
+.remember{background:var(--yellow);padding:16px 22px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;transform:rotate(.3deg)}
+.remember h2{margin:0 0 8px;font-size:20px}
+.remember ol{margin:0;padding-left:22px;columns:2;column-gap:36px} .remember li{margin:5px 0;font-size:15px;break-inside:avoid}
+footer{margin-top:20px;color:#3d2c1a;font-size:12.5px;text-align:center}
+.bigboard{display:block;position:relative;background:var(--yellow);color:var(--ink);text-decoration:none;padding:18px 22px;margin:0 0 24px;
+  border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);font-size:22px;transform:rotate(-.3deg)}
+.bigboard small{display:block;font-size:14.5px;color:var(--muted);margin-top:4px}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.toc a{display:block;background:var(--paper);color:var(--ink);text-decoration:none;padding:12px 14px;border-radius:3px;box-shadow:0 4px 9px rgba(0,0,0,.25)}
+.toc a b{display:block;font-size:13px;color:var(--muted);letter-spacing:1px}
+@media (max-width:700px){.remember ol{columns:1}}
+@media print{
+  @page{size:A3 landscape;margin:10mm}
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card,header,.remember{transform:none!important}
+  .card,.links,.timeline,.remember{box-shadow:0 0 0 1px #bbb}
+  nav.chap{display:none}
+}
+</style></head><body><div class="board"><header><span class="pin"></span><h1>🔎 «Убийства по алфавиту» — доски улик</h1><p>Агата Кристи. Шпаргалка к викторине: по одной доске на главу. Все факты — из текста книги.</p></header><a class="bigboard" href="obshchaya-doska.html"><span class="pin"></span>🕸️ <b>Общая доска: кто есть кто и кто что сделал</b><small>Все персонажи, улики и места книги, их связи и действия — с ползунком по главам и кнопкой разгадки</small></a><div class="toc"><a href="glava-01.html"><b>ГЛАВА I</b>«Письмо»</a><a href="glava-02.html"><b>ГЛАВА II</b>(без названия)</a><a href="glava-03.html"><b>ГЛАВА III</b>«Андовер»</a><a href="glava-04.html"><b>ГЛАВА IV</b>«Миссис Ашер»</a><a href="glava-05.html"><b>ГЛАВА V</b>«Мэри Дроуэр»</a><a href="glava-06.html"><b>ГЛАВА VI</b>«Место преступления»</a><a href="glava-07.html"><b>ГЛАВА VII</b>«Мистер Партридж и мистер Ридделл»</a><a href="glava-08.html"><b>ГЛАВА VIII</b>«Второе письмо»</a><a href="glava-09.html"><b>ГЛАВА IX</b>«Убийство в Бэксхилл-он-Си»</a><a href="glava-10.html"><b>ГЛАВА X</b>«Барнарды»</a><a href="glava-11.html"><b>ГЛАВА XI</b>«Меган Барнард»</a><a href="glava-12.html"><b>ГЛАВА XII</b>«Дональд Фрэйзер»</a><a href="glava-13.html"><b>ГЛАВА XIII</b>«Совещание»</a><a href="glava-14.html"><b>ГЛАВА XIV</b>«Третье письмо»</a><a href="glava-15.html"><b>ГЛАВА XV</b>«Сэр Кармайкл Кларк»</a><a href="glava-16.html"><b>ГЛАВА XVI</b>(без названия)</a><a href="glava-17.html"><b>ГЛАВА XVII</b>«Ожидание»</a><a href="glava-18.html"><b>ГЛАВА XVIII</b>«Пуаро произносит речь»</a><a href="glava-19.html"><b>ГЛАВА XIX</b>«Шведская интерлюдия»</a><a href="glava-20.html"><b>ГЛАВА XX</b>«Леди Кларк»</a><a href="glava-21.html"><b>ГЛАВА XXI</b>«Описание убийцы»</a><a href="glava-22.html"><b>ГЛАВА XXII</b>(без названия)</a><a href="glava-23.html"><b>ГЛАВА XXIII</b>«11 сентября. Донкастер»</a><a href="glava-24.html"><b>ГЛАВА XXIV</b>(без названия)</a><a href="glava-25.html"><b>ГЛАВА XXV</b>(без названия)</a><a href="glava-26.html"><b>ГЛАВА XXVI</b>(без названия)</a><a href="glava-27.html"><b>ГЛАВА XXVII</b>«Убийство в Донкастере»</a><a href="glava-28.html"><b>ГЛАВА XXVIII</b>(без названия)</a><a href="glava-29.html"><b>ГЛАВА XXIX</b>«В Скотленд-Ярде»</a><a href="glava-30.html"><b>ГЛАВА XXX</b>(без названия)</a><a href="glava-31.html"><b>ГЛАВА XXXI</b>«Эркюль Пуаро задает вопросы…»</a><a href="glava-32.html"><b>ГЛАВА XXXII</b>«…и рассуждает об охоте на лис»</a><a href="glava-33.html"><b>ГЛАВА XXXIII</b>«Александр Бонапарт Каст»</a><a href="glava-34.html"><b>ГЛАВА XXXIV</b>«Пуаро объясняет»</a></div></div></body></html>

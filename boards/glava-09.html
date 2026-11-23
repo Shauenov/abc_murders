@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Глава IX «Убийство в Бэксхилл-он-Си» — доска улик · Убийства по алфавиту</title><style>:root{
+  --cork:#c9a26b; --cork-dark:#a9824e; --paper:#fffaf0; --ink:#2b2118;
+  --muted:#6b5a48; --red:#b3261e; --pin:#d33; --yellow:#fff3b0;
+  --person:#f6e7c8; --thing:#e6eef6; --place:#e3f0e1; --time:#f9e1e1;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);
+  background:
+    radial-gradient(circle at 20% 30%,rgba(0,0,0,.06) 1px,transparent 2px) 0 0/14px 14px,
+    radial-gradient(circle at 70% 60%,rgba(255,255,255,.08) 1px,transparent 2px) 0 0/11px 11px,
+    var(--cork);}
+.board{max-width:1400px;margin:0 auto;padding:28px 28px 40px}
+header{background:var(--paper);padding:16px 24px;border-radius:4px;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);position:relative;margin-bottom:26px;transform:rotate(-.4deg)}
+header h1{margin:0;font-size:30px;letter-spacing:.5px}
+header p{margin:6px 0 0;color:var(--muted);font-size:15px}
+header .narr{display:inline-block;margin-top:8px;background:var(--time);padding:3px 10px;border-radius:12px;font-size:13.5px;color:var(--ink)}
+nav.chap{display:flex;justify-content:space-between;gap:10px;margin:0 0 18px;font-size:14px}
+nav.chap a{background:var(--paper);color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:3px;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.pin{position:absolute;top:-9px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ff8a80,var(--pin) 55%,#7a1010);box-shadow:0 2px 3px rgba(0,0,0,.4)}
+h2.section{display:inline-block;background:var(--ink);color:#fff;font-size:15px;letter-spacing:2px;
+  text-transform:uppercase;padding:6px 14px;margin:8px 0 14px;border-radius:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-bottom:26px}
+.card{background:var(--paper);border-radius:3px;padding:16px 16px 12px;position:relative;
+  box-shadow:0 5px 12px rgba(0,0,0,.28)}
+.card:nth-child(3n+1){transform:rotate(-.8deg)} .card:nth-child(3n+2){transform:rotate(.6deg)}
+.card .tag{position:absolute;top:10px;right:12px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:2px 8px;border-radius:10px;color:var(--muted)}
+.person .tag{background:var(--person)} .thing .tag{background:var(--thing)}
+.place .tag{background:var(--place)}
+.portrait{width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:52px;margin:4px 0 8px;border:3px solid #fff;box-shadow:0 0 0 2px var(--cork-dark)}
+.person .portrait{background:var(--person)} .thing .portrait{background:var(--thing)}
+.place .portrait{background:var(--place)}
+.card h3{margin:0 0 2px;font-size:21px}
+.card .role{color:var(--muted);font-style:italic;margin:0 0 10px;font-size:14px}
+.card ul{margin:0;padding-left:18px} .card li{margin:5px 0;font-size:14.5px;line-height:1.35}
+q{font-style:italic;quotes:"«" "»"} .pg{color:var(--muted);font-size:11.5px;white-space:nowrap}
+.key{background:var(--yellow);padding:0 3px}
+.letter{font-family:"Courier New",Courier,monospace;background:#fff;border:1px solid #ddd;
+  padding:12px 14px;font-size:13.5px;line-height:1.45;margin:8px 0}
+.letter .sig{text-align:right;font-weight:bold;letter-spacing:2px}
+.links{background:var(--paper);border-radius:3px;padding:16px 18px;box-shadow:0 5px 12px rgba(0,0,0,.28);margin-bottom:26px;position:relative}
+.link{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:9px 0;font-size:15px}
+.chip{padding:4px 10px;border-radius:14px;font-weight:bold;border:1px solid rgba(0,0,0,.12)}
+.chip.person{background:var(--person)} .chip.thing{background:var(--thing)} .chip.place{background:var(--place)}
+.arrow{color:var(--red);font-weight:bold}
+.arrow::after{content:" ⟶"}
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;
+  background:var(--paper);border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;margin-bottom:26px}
+.step{padding:16px 16px 14px;border-right:2px dashed var(--cork-dark);position:relative}
+.step:last-child{border-right:none}
+.step .when{display:inline-block;background:var(--red);color:#fff;font-weight:bold;font-size:13px;padding:3px 9px;border-radius:2px}
+.step p{margin:8px 0 0;font-size:14.5px;line-height:1.35}
+.remember{background:var(--yellow);padding:16px 22px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;transform:rotate(.3deg)}
+.remember h2{margin:0 0 8px;font-size:20px}
+.remember ol{margin:0;padding-left:22px;columns:2;column-gap:36px} .remember li{margin:5px 0;font-size:15px;break-inside:avoid}
+footer{margin-top:20px;color:#3d2c1a;font-size:12.5px;text-align:center}
+.bigboard{display:block;position:relative;background:var(--yellow);color:var(--ink);text-decoration:none;padding:18px 22px;margin:0 0 24px;
+  border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);font-size:22px;transform:rotate(-.3deg)}
+.bigboard small{display:block;font-size:14.5px;color:var(--muted);margin-top:4px}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.toc a{display:block;background:var(--paper);color:var(--ink);text-decoration:none;padding:12px 14px;border-radius:3px;box-shadow:0 4px 9px rgba(0,0,0,.25)}
+.toc a b{display:block;font-size:13px;color:var(--muted);letter-spacing:1px}
+@media (max-width:700px){.remember ol{columns:1}}
+@media print{
+  @page{size:A3 landscape;margin:10mm}
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card,header,.remember{transform:none!important}
+  .card,.links,.timeline,.remember{box-shadow:0 0 0 1px #bbb}
+  nav.chap{display:none}
+}
+</style></head><body><div class="board"><nav class="chap"><a href="glava-08.html">← Глава 8</a><a href="index.html">Все главы</a><a href="glava-10.html">Глава 10 →</a></nav><header><span class="pin"></span><h1>🔎 Глава IX. «Убийство в Бэксхилл-он-Си»</h1><p>Агата Кристи, «Убийства по алфавиту». Все детали и цитаты взяты из текста книги; <span class="pg">стр.</span> — номер страницы в PDF.</p><span class="narr">Рассказывает капитан Гастингс</span></header><h2 class="section">Кто</h2><div class="grid"><div class="card person"><span class="pin"></span><span class="tag">жертва B</span><div class="portrait">🤍</div><h3>Элизабет (Бетти) Барнард</h3><p class="role">официантка кафе «Рыжая кошка» <span class="pg">стр. 56</span> <span class="pg">стр. 58</span></p><ul><li><b>23 года</b> <span class="pg">стр. 58</span></li><li>Жила с родителями в <b>недавно построенном доме</b> <span class="pg">стр. 56</span></li><li>Работала в кафе <b>второе лето</b>, на постоянной основе <span class="pg">стр. 61–62</span></li><li>Тихая, но <q>в душе она была заводила</q> (мисс Хигли) <span class="pg">стр. 62–63</span></li><li>Вечером была в <b>новом белом платье</b> с <q>новомодным воротником</q> <span class="pg">стр. 63</span></li><li>Сестра — <b>машинистка в Лондоне</b>; есть <b>молодой человек</b> <span class="pg">стр. 59</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">Скотленд-Ярд</span><div class="portrait">🎓</div><h3>Инспектор Кроум</h3><p class="role">официально возглавляет расследование <span class="pg">стр. 57</span></p><ul><li><b>Молодой</b>, молчаливый, <b>заносчивый</b>; образованный и начитанный <span class="pg">стр. 57</span></li><li>Прославился делом <b>Мэйбел Хоумер</b> (убийца Каппер, теперь в <b>Бродмуре</b>) <span class="pg">стр. 57</span> <span class="pg">сноска 32</span></li><li>С Пуаро держится свысока: <q>Да неужели?</q> <span class="pg">стр. 57–58</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">полиция Бэксхилла</span><div class="portrait">🙂</div><h3>Инспектор Келси</h3><p class="role"><b>симпатичный, молодой, с интеллигентным лицом</b> <span class="pg">стр. 58–59</span></p><ul><li>Работает под руководством Кроума; увидев Пуаро, <b>широко улыбнулся</b> <span class="pg">стр. 59–60</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">нашёл тело</span><div class="portrait">🐕</div><h3>Полковник Джером</h3><p class="role">вышел <b>с собакой около 6 утра</b> <span class="pg">стр. 59</span></p><ul><li>Собака что-то унюхала на берегу; полковник ничего не трогал и сразу сообщил <span class="pg">стр. 59</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">хозяйка кафе</span><div class="portrait">🐈</div><h3>Мисс Мэррион</h3><p class="role">администратор «Рыжей кошки» <span class="pg">стр. 60</span></p><ul><li><b>Очень худая</b>, около <b>сорока</b>, копна тонких <b>оранжевых волос</b> — сама <q>напоминала рыжую кошку</q> <span class="pg">стр. 61</span></li><li>Теребит <b>кружавчики и рюши</b> на костюме <span class="pg">стр. 61</span></li><li>Кафе закрывается в <b>20:00</b> <span class="pg">стр. 61</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">официантка</span><div class="portrait">🗣️</div><h3>Мисс Хигли</h3><p class="role">коллега Бетти <span class="pg">стр. 62</span></p><ul><li><b>Пухлая</b>, <b>тёмные волосы</b>, румяные щёки, любопытные тёмные глаза <span class="pg">стр. 62</span></li><li>Повторяет одно и то же по полдесятка раз <span class="pg">стр. 63</span></li><li>Друг Бетти — <b>клерк</b> в агентстве недвижимости <b>«Корт энд Брунскил»</b> у вокзала, <q>очень симпатичный</q> <span class="pg">стр. 63</span></li></ul></div></div><h2 class="section">Улики и предметы</h2><div class="grid"><div class="card thing"><span class="pin"></span><span class="tag">орудие</span><div class="portrait">🎀</div><h3>Пояс Бетти</h3><p class="role">задушена <b>собственным поясом</b> <span class="pg">стр. 58</span></p><ul><li>Толстый <b>жгут, сплетённый из шёлка</b> — отпечатков на нём не будет <span class="pg">стр. 60</span></li></ul></div><div class="card thing"><span class="pin"></span><span class="tag">улика</span><div class="portrait">📖</div><h3>Справочник A. B. C.</h3><p class="role">лежал <b>под телом</b> <span class="pg">стр. 56</span></p><ul><li>Открыт на <b>странице Бэксхилла</b> <span class="pg">стр. 56</span> <span class="pg">стр. 59</span></li><li><b>Новый</b>, почти не пользовались, <b>куплен не здесь</b>; отпечатков нет <span class="pg">стр. 59</span></li></ul></div></div><h2 class="section">Где</h2><div class="grid"><div class="card place"><span class="pin"></span><span class="tag">место преступления</span><div class="portrait">🏖️</div><h3>Берег в Бэксхилле</h3><p class="role">тело нашли на пляже <span class="pg">стр. 56</span></p><ul><li>Смерть — <b>между полуночью и часом ночи</b> 25 июля <span class="pg">стр. 56</span> <span class="pg">стр. 59</span></li></ul></div><div class="card place"><span class="pin"></span><span class="tag">место работы</span><div class="portrait">☕</div><h3>Кафе «Рыжая кошка»</h3><p class="role">на набережной <span class="pg">стр. 60</span></p><ul><li><b>Оранжевые</b> клетчатые скатерти и подушки, плетёные стулья <span class="pg">стр. 60</span></li><li><b>Пять сортов чая</b>: девонширский, фермерский, фруктовый, «Карлтон», натуральный <span class="pg">стр. 60</span></li></ul></div></div><h2 class="section">Кто что сделал</h2><div class="links"><span class="pin"></span><div class="link"><span class="chip person">Полковник Джером</span><span class="arrow">со своей собакой находит</span><span class="chip person">Бетти Барнард</span><span><span class="pg">стр. 59</span></span></div><div class="link"><span class="chip thing">справочник A. B. C.</span><span class="arrow">лежит под телом</span><span class="chip person">Бетти</span><span><span class="pg">стр. 56</span></span></div><div class="link"><span class="chip person">Кроум, Пуаро, Гастингс</span><span class="arrow">едут из Лондона в</span><span class="chip place">Бэксхилл</span><span><span class="pg">стр. 57</span></span></div><div class="link"><span class="chip person">мисс Хигли</span><span class="arrow">рассказывает о друге Бетти</span><span class="chip place">«Корт энд Брунскил»</span><span><span class="pg">стр. 63</span></span></div></div><h2 class="section">Когда</h2><div class="timeline"><span class="pin"></span><div class="step"><span class="when">24 июля, 20:00</span><p>Кафе закрывается; Бетти уходит с работы. <span class="pg">стр. 61</span></p></div><div class="step"><span class="when">00:00–01:00</span><p>Бетти убита на берегу — уже <b>25 июля</b>, как и обещал A. B. C. <span class="pg">стр. 59</span></p></div><div class="step"><span class="when">≈ 6:00</span><p>Полковник Джером с собакой находит тело. <span class="pg">стр. 59</span></p></div><div class="step"><span class="when">25 июля, 7:30</span><p>Пуаро будит Гастингса: <q>Это случилось</q>. <span class="pg">стр. 56</span></p></div></div><div class="remember"><span class="pin"></span><h2>📌 Запомни к викторине</h2><ol><li>Вторая жертва — <b>Элизабет (Бетти) Барнард</b>, <b>23 года</b>.</li><li>Она <b>официантка</b> кафе <b>«Рыжая кошка»</b>.</li><li>Задушена <b>собственным шёлковым поясом</b> на <b>пляже</b>.</li><li>Время смерти — <b>между полуночью и часом ночи</b> 25 июля.</li><li>Тело нашёл <b>полковник Джером</b> с собакой.</li><li>Расследование ведёт <b>инспектор Кроум</b> — молодой и заносчивый.</li><li>Местный инспектор — <b>Келси</b>.</li><li>Хозяйка кафе — <b>мисс Мэррион</b>, похожа на рыжую кошку.</li><li>Бетти была в <b>новом белом платье</b>.</li><li>Её друг — клерк из <b>«Корт энд Брунскил»</b>.</li></ol></div><footer>Источник: А. Кристи, «Убийства по алфавиту», пер. А. С. Петухова (Эксмо, 2015). Страницы указаны по PDF.</footer></div></body></html>

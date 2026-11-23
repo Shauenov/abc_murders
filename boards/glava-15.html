@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Глава XV «Сэр Кармайкл Кларк» — доска улик · Убийства по алфавиту</title><style>:root{
+  --cork:#c9a26b; --cork-dark:#a9824e; --paper:#fffaf0; --ink:#2b2118;
+  --muted:#6b5a48; --red:#b3261e; --pin:#d33; --yellow:#fff3b0;
+  --person:#f6e7c8; --thing:#e6eef6; --place:#e3f0e1; --time:#f9e1e1;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);
+  background:
+    radial-gradient(circle at 20% 30%,rgba(0,0,0,.06) 1px,transparent 2px) 0 0/14px 14px,
+    radial-gradient(circle at 70% 60%,rgba(255,255,255,.08) 1px,transparent 2px) 0 0/11px 11px,
+    var(--cork);}
+.board{max-width:1400px;margin:0 auto;padding:28px 28px 40px}
+header{background:var(--paper);padding:16px 24px;border-radius:4px;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);position:relative;margin-bottom:26px;transform:rotate(-.4deg)}
+header h1{margin:0;font-size:30px;letter-spacing:.5px}
+header p{margin:6px 0 0;color:var(--muted);font-size:15px}
+header .narr{display:inline-block;margin-top:8px;background:var(--time);padding:3px 10px;border-radius:12px;font-size:13.5px;color:var(--ink)}
+nav.chap{display:flex;justify-content:space-between;gap:10px;margin:0 0 18px;font-size:14px}
+nav.chap a{background:var(--paper);color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:3px;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.pin{position:absolute;top:-9px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ff8a80,var(--pin) 55%,#7a1010);box-shadow:0 2px 3px rgba(0,0,0,.4)}
+h2.section{display:inline-block;background:var(--ink);color:#fff;font-size:15px;letter-spacing:2px;
+  text-transform:uppercase;padding:6px 14px;margin:8px 0 14px;border-radius:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-bottom:26px}
+.card{background:var(--paper);border-radius:3px;padding:16px 16px 12px;position:relative;
+  box-shadow:0 5px 12px rgba(0,0,0,.28)}
+.card:nth-child(3n+1){transform:rotate(-.8deg)} .card:nth-child(3n+2){transform:rotate(.6deg)}
+.card .tag{position:absolute;top:10px;right:12px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:2px 8px;border-radius:10px;color:var(--muted)}
+.person .tag{background:var(--person)} .thing .tag{background:var(--thing)}
+.place .tag{background:var(--place)}
+.portrait{width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:52px;margin:4px 0 8px;border:3px solid #fff;box-shadow:0 0 0 2px var(--cork-dark)}
+.person .portrait{background:var(--person)} .thing .portrait{background:var(--thing)}
+.place .portrait{background:var(--place)}
+.card h3{margin:0 0 2px;font-size:21px}
+.card .role{color:var(--muted);font-style:italic;margin:0 0 10px;font-size:14px}
+.card ul{margin:0;padding-left:18px} .card li{margin:5px 0;font-size:14.5px;line-height:1.35}
+q{font-style:italic;quotes:"«" "»"} .pg{color:var(--muted);font-size:11.5px;white-space:nowrap}
+.key{background:var(--yellow);padding:0 3px}
+.letter{font-family:"Courier New",Courier,monospace;background:#fff;border:1px solid #ddd;
+  padding:12px 14px;font-size:13.5px;line-height:1.45;margin:8px 0}
+.letter .sig{text-align:right;font-weight:bold;letter-spacing:2px}
+.links{background:var(--paper);border-radius:3px;padding:16px 18px;box-shadow:0 5px 12px rgba(0,0,0,.28);margin-bottom:26px;position:relative}
+.link{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:9px 0;font-size:15px}
+.chip{padding:4px 10px;border-radius:14px;font-weight:bold;border:1px solid rgba(0,0,0,.12)}
+.chip.person{background:var(--person)} .chip.thing{background:var(--thing)} .chip.place{background:var(--place)}
+.arrow{color:var(--red);font-weight:bold}
+.arrow::after{content:" ⟶"}
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;
+  background:var(--paper);border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;margin-bottom:26px}
+.step{padding:16px 16px 14px;border-right:2px dashed var(--cork-dark);position:relative}
+.step:last-child{border-right:none}
+.step .when{display:inline-block;background:var(--red);color:#fff;font-weight:bold;font-size:13px;padding:3px 9px;border-radius:2px}
+.step p{margin:8px 0 0;font-size:14.5px;line-height:1.35}
+.remember{background:var(--yellow);padding:16px 22px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;transform:rotate(.3deg)}
+.remember h2{margin:0 0 8px;font-size:20px}
+.remember ol{margin:0;padding-left:22px;columns:2;column-gap:36px} .remember li{margin:5px 0;font-size:15px;break-inside:avoid}
+footer{margin-top:20px;color:#3d2c1a;font-size:12.5px;text-align:center}
+.bigboard{display:block;position:relative;background:var(--yellow);color:var(--ink);text-decoration:none;padding:18px 22px;margin:0 0 24px;
+  border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);font-size:22px;transform:rotate(-.3deg)}
+.bigboard small{display:block;font-size:14.5px;color:var(--muted);margin-top:4px}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.toc a{display:block;background:var(--paper);color:var(--ink);text-decoration:none;padding:12px 14px;border-radius:3px;box-shadow:0 4px 9px rgba(0,0,0,.25)}
+.toc a b{display:block;font-size:13px;color:var(--muted);letter-spacing:1px}
+@media (max-width:700px){.remember ol{columns:1}}
+@media print{
+  @page{size:A3 landscape;margin:10mm}
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card,header,.remember{transform:none!important}
+  .card,.links,.timeline,.remember{box-shadow:0 0 0 1px #bbb}
+  nav.chap{display:none}
+}
+</style></head><body><div class="board"><nav class="chap"><a href="glava-14.html">← Глава 14</a><a href="index.html">Все главы</a><a href="glava-16.html">Глава 16 →</a></nav><header><span class="pin"></span><h1>🔎 Глава XV. «Сэр Кармайкл Кларк»</h1><p>Агата Кристи, «Убийства по алфавиту». Все детали и цитаты взяты из текста книги; <span class="pg">стр.</span> — номер страницы в PDF.</p><span class="narr">Рассказывает капитан Гастингс</span></header><h2 class="section">Кто</h2><div class="grid"><div class="card person"><span class="pin"></span><span class="tag">жертва C</span><div class="portrait">🏺</div><h3>Сэр Кармайкл Кларк</h3><p class="role">убит на вечерней прогулке <span class="pg">стр. 93</span></p><ul><li>Каждый вечер <b>после обеда</b> гулял одним и тем же маршрутом <span class="pg">стр. 93</span> <span class="pg">стр. 96</span></li><li>Возвращался <b>без четверти десять</b> через боковую дверь <span class="pg">стр. 98</span></li><li>Умер от <b>сильного удара тупым предметом по затылку</b> <span class="pg">стр. 93</span></li><li>Врач: смерть <b>мгновенная</b>, страданий не было <span class="pg">стр. 99</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">брат жертвы</span><div class="portrait">🌍</div><h3>Франклин Кларк</h3><p class="role"><b>единственный брат</b> умершего <span class="pg">стр. 94</span></p><ul><li><b>Крупный светловолосый</b> мужчина с <b>загорелым лицом</b> <span class="pg">стр. 94</span></li><li>Держится как человек, <q>привыкший действовать в критических ситуациях</q> <span class="pg">стр. 94</span></li><li>Недавно вернулся <b>с Востока</b>; объехал <q>весь белый свет</q> <span class="pg">стр. 95</span> <span class="pg">стр. 98</span></li><li>Угощает гостей <b>яичницей с беконом и кофе</b> <span class="pg">стр. 94</span></li><li>Кроума не любит: <q>Я делаю ставку на Пуаро</q> — и добавляет, что <b>у него есть план</b> <span class="pg">стр. 100</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">секретарша</span><div class="portrait">❄️</div><h3>Тора Грей</h3><p class="role">секретарша сэра Кармайкла <span class="pg">стр. 97</span></p><ul><li><b>Скандинавская красота</b>: почти <b>белые волосы</b>, <b>светло-серые глаза</b>, прозрачная бледность <span class="pg">стр. 97</span></li><li>Около <b>27 лет</b>, очень профессиональна <span class="pg">стр. 97</span></li><li>Писем с «A. B. C.» шефу <b>не приходило</b> <span class="pg">стр. 97</span></li><li>На лестнице думает о следующем убийстве — о <b>букве D</b> <span class="pg">стр. 99</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">слуга</span><div class="portrait">🎩</div><h3>Деверил</h3><p class="role"><b>пожилой дворецкий</b> <span class="pg">стр. 93</span></p><ul><li><b>Трясущиеся руки</b>, взволнованное лицо <span class="pg">стр. 93</span></li><li>Незнакомцев вчера не видел <span class="pg">стр. 97</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">жена жертвы</span><div class="portrait">💊</div><h3>Леди Кларк</h3><p class="role">тяжело больна <span class="pg">стр. 95</span></p><ul><li><b>Неизлечимый рак</b> <span class="pg">стр. 95</span></li><li>Почти всё время под воздействием <b>морфина</b> <span class="pg">стр. 98</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">полиция Девона</span><div class="portrait">🧢</div><h3>Инспектор Уэллс</h3><p class="role">местный полицейский <span class="pg">стр. 93–94</span></p><ul><li>Назвал Гастингса <b>«капитан Хайтер»</b> — тот <b>холодно поправил</b> <span class="pg">стр. 94</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">Скотленд-Ярд</span><div class="portrait">🎓</div><h3>Инспектор Кроум</h3><p class="role">ведёт опрос <span class="pg">стр. 96–97</span></p><ul><li>Версия: убийца <b>прятался в тени</b>, жертва ничего не заметила <span class="pg">стр. 99</span></li><li>Убийца заранее <b>следил за домом</b> и узнал о привычке <span class="pg">стр. 96</span></li></ul></div></div><h2 class="section">Улики и предметы</h2><div class="grid"><div class="card thing"><span class="pin"></span><span class="tag">улика</span><div class="portrait">📖</div><h3>Справочник A. B. C.</h3><p class="role">лежал <b>рядом с телом</b> <span class="pg">стр. 93</span></p></div><div class="card thing"><span class="pin"></span><span class="tag">коллекция</span><div class="portrait">🏺</div><h3>Две галереи с сокровищами</h3><p class="role"><span class="pg">стр. 93</span></p><ul><li>Дом невелик, но в нём <b>две громадные галереи</b> с коллекцией <span class="pg">стр. 93</span></li><li>После прогулки сэр Кармайкл шёл в постель или <b>в галереи</b> <span class="pg">стр. 98</span></li></ul></div></div><h2 class="section">Где</h2><div class="grid"><div class="card place"><span class="pin"></span><span class="tag">дом жертвы</span><div class="portrait">🏠</div><h3>Комбсайд</h3><p class="role"><b>белый четырёхугольный дом современного дизайна</b> на побережье <span class="pg">стр. 93</span></p><ul><li>Участок <b>в два акра</b>, на первой линии, с видом на море <span class="pg">стр. 93</span></li></ul></div><div class="card place"><span class="pin"></span><span class="tag">город</span><div class="portrait">🏖️</div><h3>Керстон</h3><p class="role">между Бриксхэмом, Пейнтоном и Торки <span class="pg">стр. 93</span></p><ul><li>Посередине <b>дуги залива Торбэй</b> <span class="pg">стр. 93</span> <span class="pg">сноска 52</span></li><li>Раньше — поля для гольфа и пара ферм; теперь стройка коттеджей и бунгало <span class="pg">стр. 93</span></li><li>Деревни нет: <b>почта и коттеджи в Керстон-Феттерс</b> <span class="pg">стр. 96</span></li></ul></div><div class="card place"><span class="pin"></span><span class="tag">маршрут прогулки</span><div class="portrait">🌅</div><h3>Пещера Элбери и Броудсэндс</h3><p class="role"><span class="pg">стр. 96–98</span></p><ul><li>Через <b>садовую калитку</b> → поля для гольфа → изгородь → крутая извилистая дорога вниз <span class="pg">стр. 98</span></li><li><b>Травяной мыс</b>, пляж из белых камней, вечнозелёные деревья до воды <span class="pg">стр. 98</span></li><li>Обратно: тропинка вверх, <b>направо</b>, мимо <b>фермы</b>, полем к дому; тело нашли у <b>живой изгороди</b> <span class="pg">стр. 99</span></li><li>Броудсэндс — популярный пляж, Элбери — место для пикников <span class="pg">стр. 96</span></li></ul></div></div><h2 class="section">Кто что сделал</h2><div class="links"><span class="pin"></span><div class="link"><span class="chip person">Пуаро, Кроум, Гастингс</span><span class="arrow">приезжают в</span><span class="chip place">Комбсайд</span><span>около 8:00 <span class="pg">стр. 93</span></span></div><div class="link"><span class="chip person">Уэллс</span><span class="arrow">знакомит их с</span><span class="chip person">Франклином Кларком</span><span><span class="pg">стр. 94</span></span></div><div class="link"><span class="chip person">Тора Грей</span><span class="arrow">провожает на мыс вместе с</span><span class="chip person">Франклином</span><span><span class="pg">стр. 97–98</span></span></div><div class="link"><span class="chip person">Тора Грей</span><span class="arrow">тревожится о</span><span>букве D <span class="pg">стр. 99</span></span></div><div class="link"><span class="chip person">Франклин</span><span class="arrow">ставит на</span><span class="chip person">Пуаро</span><span class="arrow">имеет</span><span>план <span class="pg">стр. 100</span></span></div></div><h2 class="section">Когда</h2><div class="timeline"><span class="pin"></span><div class="step"><span class="when">Накануне ≈ 21:45</span><p>Обычно в это время сэр Кармайкл возвращался с прогулки. <span class="pg">стр. 98</span></p></div><div class="step"><span class="when">После 23:00</span><p>Полиция звонит в дом — сэр Кармайкл ещё не вернулся; поисковики быстро находят тело по привычному маршруту. <span class="pg">стр. 93</span></p></div><div class="step"><span class="when">≈ 8:00</span><p>Пуаро, Кроум и Гастингс в Комбсайде; завтрак с Франклином. <span class="pg">стр. 93–94</span></p></div><div class="step"><span class="when">Утро</span><p>Опрос, прогулка по маршруту, осмотр места убийства. <span class="pg">стр. 96–99</span></p></div></div><div class="remember"><span class="pin"></span><h2>📌 Запомни к викторине</h2><ol><li>Дом называется <b>Комбсайд</b>: белый, четырёхугольный, с двумя галереями.</li><li>Дворецкий — <b>Деверил</b>; местный инспектор — <b>Уэллс</b>.</li><li>Брат — <b>Франклин Кларк</b>, светловолосый, загорелый, вернулся <b>с Востока</b>.</li><li>Секретарша — <b>Тора Грей</b>, 27 лет, почти белые волосы.</li><li>Леди Кларк больна <b>раком</b>, на <b>морфине</b>.</li><li>Тело нашли у <b>живой изгороди</b> на привычном маршруте.</li><li>Тора Грей думает о следующей букве — <b>D</b>.</li><li>Франклин: «<b>У меня есть план</b>» — и он ставит на Пуаро.</li></ol></div><footer>Источник: А. Кристи, «Убийства по алфавиту», пер. А. С. Петухова (Эксмо, 2015). Страницы указаны по PDF.</footer></div></body></html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Глава XIX «Шведская интерлюдия» — доска улик · Убийства по алфавиту</title><style>:root{
+  --cork:#c9a26b; --cork-dark:#a9824e; --paper:#fffaf0; --ink:#2b2118;
+  --muted:#6b5a48; --red:#b3261e; --pin:#d33; --yellow:#fff3b0;
+  --person:#f6e7c8; --thing:#e6eef6; --place:#e3f0e1; --time:#f9e1e1;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);
+  background:
+    radial-gradient(circle at 20% 30%,rgba(0,0,0,.06) 1px,transparent 2px) 0 0/14px 14px,
+    radial-gradient(circle at 70% 60%,rgba(255,255,255,.08) 1px,transparent 2px) 0 0/11px 11px,
+    var(--cork);}
+.board{max-width:1400px;margin:0 auto;padding:28px 28px 40px}
+header{background:var(--paper);padding:16px 24px;border-radius:4px;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);position:relative;margin-bottom:26px;transform:rotate(-.4deg)}
+header h1{margin:0;font-size:30px;letter-spacing:.5px}
+header p{margin:6px 0 0;color:var(--muted);font-size:15px}
+header .narr{display:inline-block;margin-top:8px;background:var(--time);padding:3px 10px;border-radius:12px;font-size:13.5px;color:var(--ink)}
+nav.chap{display:flex;justify-content:space-between;gap:10px;margin:0 0 18px;font-size:14px}
+nav.chap a{background:var(--paper);color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:3px;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.pin{position:absolute;top:-9px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ff8a80,var(--pin) 55%,#7a1010);box-shadow:0 2px 3px rgba(0,0,0,.4)}
+h2.section{display:inline-block;background:var(--ink);color:#fff;font-size:15px;letter-spacing:2px;
+  text-transform:uppercase;padding:6px 14px;margin:8px 0 14px;border-radius:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-bottom:26px}
+.card{background:var(--paper);border-radius:3px;padding:16px 16px 12px;position:relative;
+  box-shadow:0 5px 12px rgba(0,0,0,.28)}
+.card:nth-child(3n+1){transform:rotate(-.8deg)} .card:nth-child(3n+2){transform:rotate(.6deg)}
+.card .tag{position:absolute;top:10px;right:12px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:2px 8px;border-radius:10px;color:var(--muted)}
+.person .tag{background:var(--person)} .thing .tag{background:var(--thing)}
+.place .tag{background:var(--place)}
+.portrait{width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:52px;margin:4px 0 8px;border:3px solid #fff;box-shadow:0 0 0 2px var(--cork-dark)}
+.person .portrait{background:var(--person)} .thing .portrait{background:var(--thing)}
+.place .portrait{background:var(--place)}
+.card h3{margin:0 0 2px;font-size:21px}
+.card .role{color:var(--muted);font-style:italic;margin:0 0 10px;font-size:14px}
+.card ul{margin:0;padding-left:18px} .card li{margin:5px 0;font-size:14.5px;line-height:1.35}
+q{font-style:italic;quotes:"«" "»"} .pg{color:var(--muted);font-size:11.5px;white-space:nowrap}
+.key{background:var(--yellow);padding:0 3px}
+.letter{font-family:"Courier New",Courier,monospace;background:#fff;border:1px solid #ddd;
+  padding:12px 14px;font-size:13.5px;line-height:1.45;margin:8px 0}
+.letter .sig{text-align:right;font-weight:bold;letter-spacing:2px}
+.links{background:var(--paper);border-radius:3px;padding:16px 18px;box-shadow:0 5px 12px rgba(0,0,0,.28);margin-bottom:26px;position:relative}
+.link{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:9px 0;font-size:15px}
+.chip{padding:4px 10px;border-radius:14px;font-weight:bold;border:1px solid rgba(0,0,0,.12)}
+.chip.person{background:var(--person)} .chip.thing{background:var(--thing)} .chip.place{background:var(--place)}
+.arrow{color:var(--red);font-weight:bold}
+.arrow::after{content:" ⟶"}
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;
+  background:var(--paper);border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;margin-bottom:26px}
+.step{padding:16px 16px 14px;border-right:2px dashed var(--cork-dark);position:relative}
+.step:last-child{border-right:none}
+.step .when{display:inline-block;background:var(--red);color:#fff;font-weight:bold;font-size:13px;padding:3px 9px;border-radius:2px}
+.step p{margin:8px 0 0;font-size:14.5px;line-height:1.35}
+.remember{background:var(--yellow);padding:16px 22px;box-shadow:0 5px 12px rgba(0,0,0,.28);position:relative;transform:rotate(.3deg)}
+.remember h2{margin:0 0 8px;font-size:20px}
+.remember ol{margin:0;padding-left:22px;columns:2;column-gap:36px} .remember li{margin:5px 0;font-size:15px;break-inside:avoid}
+footer{margin-top:20px;color:#3d2c1a;font-size:12.5px;text-align:center}
+.bigboard{display:block;position:relative;background:var(--yellow);color:var(--ink);text-decoration:none;padding:18px 22px;margin:0 0 24px;
+  border-radius:3px;box-shadow:0 5px 12px rgba(0,0,0,.28);font-size:22px;transform:rotate(-.3deg)}
+.bigboard small{display:block;font-size:14.5px;color:var(--muted);margin-top:4px}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.toc a{display:block;background:var(--paper);color:var(--ink);text-decoration:none;padding:12px 14px;border-radius:3px;box-shadow:0 4px 9px rgba(0,0,0,.25)}
+.toc a b{display:block;font-size:13px;color:var(--muted);letter-spacing:1px}
+@media (max-width:700px){.remember ol{columns:1}}
+@media print{
+  @page{size:A3 landscape;margin:10mm}
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card,header,.remember{transform:none!important}
+  .card,.links,.timeline,.remember{box-shadow:0 0 0 1px #bbb}
+  nav.chap{display:none}
+}
+</style></head><body><div class="board"><nav class="chap"><a href="glava-18.html">← Глава 18</a><a href="index.html">Все главы</a><a href="glava-20.html">Глава 20 →</a></nav><header><span class="pin"></span><h1>🔎 Глава XIX. «Шведская интерлюдия»</h1><p>Агата Кристи, «Убийства по алфавиту». Все детали и цитаты взяты из текста книги; <span class="pg">стр.</span> — номер страницы в PDF.</p><span class="narr">Рассказывает капитан Гастингс</span></header><h2 class="section">Кто</h2><div class="grid"><div class="card person"><span class="pin"></span><span class="tag">сыщик</span><div class="portrait"><svg viewBox="0 0 100 50" width="70" height="35" aria-label="усы"><path d="M50 22c-6-10-20-12-30-6-6 4-10 2-14-3 0 10 8 18 20 17 10 0 18-4 24-8zM50 22c6-10 20-12 30-6 6 4 10 2 14-3 0 10-8 18-20 17-10 0-18-4-24-8z" fill="#2b2118"/></svg></div><h3>Эркюль Пуаро</h3><p class="role">после собрания «спецкоманды» <span class="pg">стр. 121</span></p><ul><li>О Меган: <q>Очень жаль, что она так умна</q> — она сразу поняла, что речь была «пустой» <span class="pg">стр. 121</span></li><li>Его речь можно было выразить <b>одним предложением</b>, но он повторял её разными словами — <b>чтобы все заговорили друг с другом</b> <span class="pg">стр. 121</span></li><li><q>Убийство — это прекрасная сваха</q> <span class="pg">стр. 121</span></li><li>Замечает платье Торы: <b>«креп марокен»</b> и <b>лисий воротник</b>, <i>dernier cri</i> <span class="pg">стр. 124</span></li><li>Чувствует: сегодня <b>что-то важное</b> было сказано, но не вспомнить что — не про Керстон, а <b>до него</b> <span class="pg">стр. 124</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">рассказчик</span><div class="portrait">📝</div><h3>Капитан Гастингс</h3><p class="role">Пуаро читает его мысли по песенке <span class="pg">стр. 122</span></p><ul><li>Напевает военную песенку: <q>Я брюнетку любил, был доволен вполне, Но блондинка из Швеции глянулась мне</q> <span class="pg">стр. 122</span></li><li>Краснеет, когда Пуаро намекает на Тору Грей <span class="pg">стр. 122</span></li><li>Восхищается смелостью Торы <span class="pg">стр. 123</span></li><li>В конце посылает Пуаро <q>к черту</q> <span class="pg">стр. 124</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">гостья</span><div class="portrait">❄️</div><h3>Тора Грей</h3><p class="role">возвращается к Пуаро сама <span class="pg">стр. 122</span></p><ul><li>Признаётся: из Комбсайда она ушла <b>не по своей воле</b> — <b>леди Кларк потребовала</b> <span class="pg">стр. 123</span></li><li>Готова была остаться: коллекции <b>требуют постоянного внимания</b> <span class="pg">стр. 123</span></li><li>Считает, что у леди Кларк <b>необъяснимая ненависть</b> из-за лекарств <span class="pg">стр. 123</span></li><li>Раньше думала, что леди Кларк ей <b>симпатизирует</b> <span class="pg">стр. 123</span></li><li>О Франклине: <q>Он настоящий рыцарь</q> — говорит тепло <span class="pg">стр. 123</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">упоминается</span><div class="portrait">💊</div><h3>Леди Кларк</h3><p class="role">тяжело больна <span class="pg">стр. 123</span></p><ul><li>Настояла, чтобы мисс Грей <b>немедленно покинула дом</b> <span class="pg">стр. 123</span></li><li>Из-за лекарств <b>капризна и подозрительна</b> <span class="pg">стр. 123</span></li></ul></div><div class="card person"><span class="pin"></span><span class="tag">упоминается</span><div class="portrait">🌍</div><h3>Франклин Кларк</h3><p class="role"><span class="pg">стр. 122</span></p><ul><li>Пуаро: у Франклина <b>проснулась симпатия к Меган</b> — это <b>разозлило</b> Тору Грей <span class="pg">стр. 122</span></li></ul></div></div><h2 class="section">Улики и предметы</h2><div class="grid"><div class="card thing"><span class="pin"></span><span class="tag">намёк</span><div class="portrait">🎵</div><h3>Песенка про шведскую блондинку</h3><p class="role">Гастингс напевает, Пуаро поёт «отвратительным фальцетом» <span class="pg">стр. 122</span></p><ul><li>В конце главы Пуаро <b>снова мурлычет</b> ту же песенку <span class="pg">стр. 124</span></li></ul></div></div><h2 class="section">Где</h2><div class="grid"><div class="card place"><span class="pin"></span><span class="tag">место действия</span><div class="portrait">🏢</div><h3>Квартира Пуаро</h3><p class="role">разговор после заседания <span class="pg">стр. 121–124</span></p></div></div><h2 class="section">Кто что сделал</h2><div class="links"><span class="pin"></span><div class="link"><span class="chip person">Меган</span><span class="arrow">поняла</span><span>что речь Пуаро — пустые слова <span class="pg">стр. 121</span></span></div><div class="link"><span class="chip person">Тора Грей</span><span class="arrow">признаётся Пуаро</span><span>что её выгнала</span><span class="chip person">леди Кларк</span><span><span class="pg">стр. 123</span></span></div><div class="link"><span class="chip person">Пуаро</span><span class="arrow">дразнит</span><span class="chip person">Гастингса</span><span>песенкой про шведскую блондинку <span class="pg">стр. 122</span></span></div><div class="link"><span class="chip person">Пуаро</span><span class="arrow">чувствует</span><span>что услышал нечто важное, но не может вспомнить <span class="pg">стр. 124</span></span></div></div><h2 class="section">Когда</h2><div class="timeline"><span class="pin"></span><div class="step"><span class="when">После собрания</span><p>Пуаро объясняет, зачем произнёс речь. <span class="pg">стр. 121</span></p></div><div class="step"><span class="when">Интерлюдия</span><p>Он шутит над Гастингсом и «шведской блондинкой». <span class="pg">стр. 122</span></p></div><div class="step"><span class="when">Тора возвращается</span><p>Рассказывает, как её уволила леди Кларк. <span class="pg">стр. 122–123</span></p></div><div class="step"><span class="when">Финал</span><p>Пуаро: «что-то важное было сказано» — и снова мурлычет песенку. <span class="pg">стр. 124</span></p></div></div><div class="remember"><span class="pin"></span><h2>📌 Запомни к викторине</h2><ol><li>Глава называется <b>«Шведская интерлюдия»</b>.</li><li>Пуаро: речь он произнёс, <b>чтобы все стали разговаривать</b>.</li><li><b>Меган</b> разгадала, что речь «пустая».</li><li>Песенка Гастингса — про <b>брюнетку</b> и <b>блондинку из Швеции</b>.</li><li>Тору Грей <b>уволила леди Кларк</b> — Франклин это скрыл из благородства.</li><li>На Торе Грей — платье из <b>«креп марокен»</b> с <b>лисьим воротником</b>.</li><li>Пуаро: сегодня было сказано что-то важное, но он <b>не может вспомнить</b>, что.</li></ol></div><footer>Источник: А. Кристи, «Убийства по алфавиту», пер. А. С. Петухова (Эксмо, 2015). Страницы указаны по PDF.</footer></div></body></html>
